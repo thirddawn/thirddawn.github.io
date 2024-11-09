@@ -1,0 +1,246 @@
+*,*:after {
+    padding: 0;
+    margin: 0;
+}
+
+html:after{
+    content:"";
+    background-image:url("https://upload.wikimedia.org/wikipedia/commons/7/76/1k_Dissolve_Noise_Texture.png");
+    height: 300%;
+    width: 300%;
+    position: fixed;
+    top:0%;
+    opacity:0.1;
+    animation: animateGrain 8s steps(10) infinite;
+    z-index: 10;
+    pointer-events: none;
+}
+
+@property --colour-one {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: rgba(85,88,244,1);
+}
+
+@property --colour-two {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: rgba(236,58,58,1);
+}
+
+@keyframes colourEffect {
+    0%{
+        --colour-one: rgba(85,88,244,1);
+        --colour-two: rgba(236,58,58,1);
+    }
+    10%{
+        --colour-one: #133a94;
+        --colour-two: #919bff;
+    }
+    20%{
+        --colour-one: rgba(86,207,102,1);
+        --colour-two: rgba(251,27,163,1);
+    }
+    30%{
+        --colour-one: #f9bc2c;
+        --colour-two: #f74c06;
+    }
+    40%{
+        --colour-one: #0F2027;
+        --colour-two: #2C5364;  
+    }
+    50%{
+        --colour-one: #000000;
+        --colour-two: #0f9b0f;  
+    }
+    60%{
+        --colour-one: #FFEDBC;
+        --colour-two: #ED4264;  
+    }
+    70%{
+        --colour-one: #DA22FF;
+        --colour-two: #9733EE;  
+    }
+    80%{
+        --colour-one: #FFE000;
+        --colour-two: #799F0C;  
+    }
+    90%{
+        --colour-one: #e28e1f;
+        --colour-two: #191919;
+    }
+    100%{
+        --colour-one: rgba(85,88,244,1);
+        --colour-two: rgba(236,58,58,1);
+    }
+}
+
+html, body {
+height: 100vh;
+margin: 0;
+overflow-x: hidden;
+scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar
+{
+display: none;
+}
+
+@keyframes animateGrain{
+    0%, 100% { transform:translate(0, 0) }
+    10%{
+      transform:translate(-5%,-10%)
+    }
+    20%{
+      transform:translate(-15%,-20%)
+    }
+    30%{
+      transform:translate(-5%,-10%)
+    }
+    40%{
+      transform:translate(-15%,-20%)
+    }
+    50%{
+      transform:translate(-5%,-10%)
+    }
+    60%{
+      transform:translate(-15%,-20%)
+    }
+    70%{
+      transform:translate(-5%,-10%)
+    }
+    80%{
+      transform:translate(-15%,-20%)
+    }
+    90%{
+      transform:translate(-5%,-10%)
+    }
+    100%{
+      transform:translate(-15%,-20%)
+    }
+}
+
+html{
+    background-color: #191919;
+}
+
+body{
+    background: linear-gradient(to right, 
+  rgba(255, 99, 71, 0.6) 0%,  /* Soft red with opacity */
+  rgba(255, 99, 71, 0.4) 10%, 
+  rgba(255, 99, 71, 0.2) 30%, 
+  #191919 50%,  /* Dark center */
+  rgba(144, 238, 144, 0.2) 70%, /* Soft green with opacity */
+  rgba(144, 238, 144, 0.4) 90%, 
+  rgba(144, 238, 144, 0.6) 100%); /* Full opacity green */
+    animation: colourEffect 120s ease-in-out both infinite;
+}
+
+#header{
+    position: fixed;
+    width: 100%;
+    height: 50px;
+    top:0px;
+    left:0px;
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: end;
+    padding-top: 10px;
+    gap: 10px;
+
+    #toolbar{
+        border-radius: 1000px;
+        padding: 0px 10px;
+        box-shadow: inset 0 200px 5000px rgba(255, 255, 255, 0.14);
+        backdrop-filter: blur(2px); 
+    }
+
+    .inactive{
+        height: 35px;
+        opacity: 0.7;
+        transition: opacity 0.1s, transform 0.1s;
+    }
+    .inactive:hover{
+        opacity: 1;
+        transform: rotate(5deg);
+    }
+    .active{
+        height: 40px;
+    }
+}
+
+#main{
+    width: 100%;
+    height: 100%;
+}
+
+.textColour{
+    background: -webkit-linear-gradient(var(--colour-one), var(--colour-two));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+@property --image-url{
+    syntax: "<url>";
+    inherits: true;
+    initial-value: url("https://upload.wikimedia.org/wikipedia/en/c/c5/Andrew_Hink_selfie.jpeg");
+}
+
+/* Card Styles */
+.card {
+    height: 75vh;
+    aspect-ratio: 2/3;
+    background: linear-gradient(0deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 50%), linear-gradient(0deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 50%), var(--image-url);
+    background-size: cover;
+    background-position: center;
+    border-radius: 50px;
+    color: white;   
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.1s ease-out;
+    overflow: hidden; /* To ensure the content stays within bounds */
+    z-index: 10;
+    transform-origin: 0% 0%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.card.inactiveCard{
+    filter: blur(2px) brightness(0.5);
+    position: absolute;
+    z-index: 0;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+}
+
+.card .shine{
+    height: 100%;
+    width: 100%;
+    position: absolute;
+}
+
+/* Text Styles */
+.card h1 {
+    font-family: 'Montserrat', sans-serif;
+    position: absolute;
+    bottom: 60px; /* Position it above the bottom */
+    left: 30px;
+    z-index: 2; /* Ensure it appears above the background */
+    transform: translateZ(-50px); /* Move it away from the viewer */
+    transition: transform 0.1s ease-out; /* Smooth transition on transform */
+}
+
+.card p {
+    font-family: 'DM Sans', sans-serif;
+    font-style: italic;
+    position: absolute;
+    bottom: 40px; /* Position slightly below h1 */
+    left: 30px;
+    z-index: 1; /* Ensure it appears above the background but below the h1 */
+    transform: translateZ(-30px); /* Move it away from the viewer */
+    transition: transform 0.1s ease-out; /* Smooth transition on transform */
+}

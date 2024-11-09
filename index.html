@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Third Dawn Studios</title>
+    <link rel="stylesheet" href="fonts.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="header">
+    <div id="toolbar">
+      <svg xmlns="http://www.w3.org/2000/svg" class="inactive" viewBox="0 -960 960 960" fill="#fff" onclick="window.location.href = '/projects'"><path d="M160-160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h240l80 80h320q33 0 56.5 23.5T880-640v400q0 33-23.5 56.5T800-160H160Z"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" class="active" viewBox="0 -960 960 960" fill="#fff"><path d="M160-120v-480l320-240 320 240v480H560v-280H400v280H160Z"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" class="inactive" viewBox="0 -960 960 960" fill="#fff" onclick="window.location.href = '/team'"><path d="M40-160v-112q0-34 17.5-62.5T104-378q62-31 126-46.5T360-440q66 0 130 15.5T616-378q29 15 46.5 43.5T680-272v112H40Zm720 0v-120q0-44-24.5-84.5T666-434q51 6 96 20.5t84 35.5q36 20 55 44.5t19 53.5v120H760ZM360-480q-66 0-113-47t-47-113q0-66 47-113t113-47q66 0 113 47t47 113q0 66-47 113t-113 47Zm400-160q0 66-47 113t-113 47q-11 0-28-2.5t-28-5.5q27-32 41.5-71t14.5-81q0-42-14.5-81T544-792q14-5 28-6.5t28-1.5q66 0 113 47t47 113Z"/></svg>
+    </div>
+  </div>
+  <div id="main">
+    <svg id="mainSvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 350 180">
+        <defs>
+          <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="2" result="blurred"/>
+            <feMerge>
+              <feMergeNode in="blurred"/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+          </filter>
+          <linearGradient id="fadeout" x1="0%" y1="100%" x2="100%" y2="0%">
+            <stop offset="19.5%" style="stop-color: #fff; stop-opacity: 0" />
+            <stop offset="22%" style="stop-color: #fff; stop-opacity: 0.5" />
+            <stop offset="80%" style="stop-color: #fff; stop-opacity: 0.5" />
+            <stop offset="82.5%" style="stop-color: #fff; stop-opacity: 0" />
+          </linearGradient>
+        </defs>
+        <ellipse cx="160" cy="90" rx="227.8125" ry="151.875" style="transform-origin: 160px 90px; transform: rotate(40deg)" fill="none" stroke="black" stroke-width="1px" class="orbit0" pathLength="100"/>
+        <ellipse cx="160" cy="90" rx="151.875" ry="101.25" style="transform-origin: 160px 90px; transform: rotate(40deg)" fill="none" stroke="black" stroke-width="1px" class="orbit1" pathLength="100"/>
+        <ellipse cx="160" cy="90" rx="101.25" ry="67.5" style="transform-origin: 160px 90px; transform: rotate(40deg)" fill="none" stroke="black" stroke-width="1px" class="orbit2" pathLength="100"/>
+        <ellipse cx="160" cy="90" rx="67.5" ry="45" style="transform-origin: 160px 90px; transform: rotate(40deg)" fill="none" stroke="black" stroke-width="1px" class="orbit3" pathLength="100"/>
+        <ellipse cx="160" cy="90" rx="45" ry="30" style="transform-origin: 160px 90px; transform: rotate(40deg)" fill="none" stroke="black" stroke-width="1px" class="orbit4" pathLength="100"/>
+        <text x="50" y="100" font-size="30" fill="none" stroke="#9FF" stroke-width="0.5" filter="url(#glow)" pathLength="1" class="path">Third Dawn Studios</text>
+    </svg>     
+    <div id="scrollDownIcon">
+      <a href="#content">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="inherit" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+          <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+  <div id="content">
+    <h1>One studio for <span class="textColour cursor">everything.</span></h1>
+    <h2>We are committed to building a better future, a monumental task for any one group...</h2>
+    <p>Which is why we aren't limiting ourselves to just one industry. By reaching beyond industry borders through shared experiences and goals, we are working towards a future for all.<br>This manifests as Third Dawn Studios releasing all types of products, whether it be music, games, software or hardware.</p>
+    <div id="productCarousel">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-cassette-fill" viewBox="0 0 16 16">
+        <path d="M1.5 2A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h.191l1.862-3.724A.5.5 0 0 1 4 10h8a.5.5 0 0 1 .447.276L14.31 14h.191a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2zM4 7a1 1 0 1 1 0-2 1 1 0 0 1 0 2m8 0a1 1 0 1 1 0-2 1 1 0 0 1 0 2M6 6a1 1 0 0 1 1-1h2a1 1 0 0 1 0 2H7a1 1 0 0 1-1-1"/>
+        <path d="m13.191 14-1.5-3H4.309l-1.5 3z"/>
+      </svg>
+      <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-camera-video-fill" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M0 5a2 2 0 0 1 2-2h7.5a2 2 0 0 1 1.983 1.738l3.11-1.382A1 1 0 0 1 16 4.269v7.462a1 1 0 0 1-1.406.913l-3.111-1.382A2 2 0 0 1 9.5 13H2a2 2 0 0 1-2-2z"/>
+      </svg>
+      <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-code" viewBox="0 0 16 16">
+        <path d="M5.854 4.854a.5.5 0 1 0-.708-.708l-3.5 3.5a.5.5 0 0 0 0 .708l3.5 3.5a.5.5 0 0 0 .708-.708L2.707 8zm4.292 0a.5.5 0 0 1 .708-.708l3.5 3.5a.5.5 0 0 1 0 .708l-3.5 3.5a.5.5 0 0 1-.708-.708L13.293 8z"/>
+      </svg>
+      <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-nut-fill" viewBox="0 0 16 16">
+        <path d="M4.58 1a1 1 0 0 0-.868.504l-3.428 6a1 1 0 0 0 0 .992l3.428 6A1 1 0 0 0 4.58 15h6.84a1 1 0 0 0 .868-.504l3.429-6a1 1 0 0 0 0-.992l-3.429-6A1 1 0 0 0 11.42 1zm5.018 9.696a3 3 0 1 1-3-5.196 3 3 0 0 1 3 5.196"/>
+      </svg>    
+      <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-android" viewBox="0 0 16 16">
+        <path d="M2.76 3.061a.5.5 0 0 1 .679.2l1.283 2.352A8.9 8.9 0 0 1 8 5a8.9 8.9 0 0 1 3.278.613l1.283-2.352a.5.5 0 1 1 .878.478l-1.252 2.295C14.475 7.266 16 9.477 16 12H0c0-2.523 1.525-4.734 3.813-5.966L2.56 3.74a.5.5 0 0 1 .2-.678ZM5 10a1 1 0 1 0 0-2 1 1 0 0 0 0 2m6 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2"/>
+      </svg>
+      <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-apple" viewBox="0 0 16 16">
+        <path d="M11.182.008C11.148-.03 9.923.023 8.857 1.18c-1.066 1.156-.902 2.482-.878 2.516s1.52.087 2.475-1.258.762-2.391.728-2.43m3.314 11.733c-.048-.096-2.325-1.234-2.113-3.422s1.675-2.789 1.698-2.854-.597-.79-1.254-1.157a3.7 3.7 0 0 0-1.563-.434c-.108-.003-.483-.095-1.254.116-.508.139-1.653.589-1.968.607-.316.018-1.256-.522-2.267-.665-.647-.125-1.333.131-1.824.328-.49.196-1.422.754-2.074 2.237-.652 1.482-.311 3.83-.067 4.56s.625 1.924 1.273 2.796c.576.984 1.34 1.667 1.659 1.899s1.219.386 1.843.067c.502-.308 1.408-.485 1.766-.472.357.013 1.061.154 1.782.539.571.197 1.111.115 1.652-.105.541-.221 1.324-1.059 2.238-2.758q.52-1.185.473-1.282"/>
+        <path d="M11.182.008C11.148-.03 9.923.023 8.857 1.18c-1.066 1.156-.902 2.482-.878 2.516s1.52.087 2.475-1.258.762-2.391.728-2.43m3.314 11.733c-.048-.096-2.325-1.234-2.113-3.422s1.675-2.789 1.698-2.854-.597-.79-1.254-1.157a3.7 3.7 0 0 0-1.563-.434c-.108-.003-.483-.095-1.254.116-.508.139-1.653.589-1.968.607-.316.018-1.256-.522-2.267-.665-.647-.125-1.333.131-1.824.328-.49.196-1.422.754-2.074 2.237-.652 1.482-.311 3.83-.067 4.56s.625 1.924 1.273 2.796c.576.984 1.34 1.667 1.659 1.899s1.219.386 1.843.067c.502-.308 1.408-.485 1.766-.472.357.013 1.061.154 1.782.539.571.197 1.111.115 1.652-.105.541-.221 1.324-1.059 2.238-2.758q.52-1.185.473-1.282"/>
+      </svg> 
+      <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-bag-fill" viewBox="0 0 16 16">
+        <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1m3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4z"/>
+      </svg>
+      <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-question-lg" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M4.475 5.458c-.284 0-.514-.237-.47-.517C4.28 3.24 5.576 2 7.825 2c2.25 0 3.767 1.36 3.767 3.215 0 1.344-.665 2.288-1.79 2.973-1.1.659-1.414 1.118-1.414 2.01v.03a.5.5 0 0 1-.5.5h-.77a.5.5 0 0 1-.5-.495l-.003-.2c-.043-1.221.477-2.001 1.645-2.712 1.03-.632 1.397-1.135 1.397-2.028 0-.979-.758-1.698-1.926-1.698-1.009 0-1.71.529-1.938 1.402-.066.254-.278.461-.54.461h-.777ZM7.496 14c.622 0 1.095-.474 1.095-1.09 0-.618-.473-1.092-1.095-1.092-.606 0-1.087.474-1.087 1.091S6.89 14 7.496 14"/>
+      </svg>        
+    </div>
+    <svg class="waves" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 50">
+      <defs>
+        <linearGradient id="waveGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" style="stop-color: var(--colour-one); stop-opacity: 1" />
+          <stop offset="100%" style="stop-color: var(--colour-two); stop-opacity: 1" />
+        </linearGradient>
+      </defs>
+      <path style="transform: scale(1, 0.1)" fill="url(#waveGradient)" fill-opacity="1" 
+            d="M0,224L17.1,197.3C34.3,171,69,117,103,90.7C137.1,64,171,64,206,58.7C240,53,274,43,309,64C342.9,85,377,139,411,144C445.7,149,480,107,514,101.3C548.6,96,583,128,617,138.7C651.4,149,686,139,720,117.3C754.3,96,789,64,823,64C857.1,64,891,96,926,133.3C960,171,994,213,1029,240C1062.9,267,1097,277,1131,261.3C1165.7,245,1200,203,1234,160C1268.6,117,1303,75,1337,96C1371.4,117,1406,203,1423,245.3L1440,288L1440,320L1422.9,320C1405.7,320,1371,320,1337,320C1302.9,320,1269,320,1234,320C1200,320,1166,320,1131,320C1097.1,320,1063,320,1029,320C994.3,320,960,320,926,320C891.4,320,857,320,823,320C788.6,320,754,320,720,320C685.7,320,651,320,617,320C582.9,320,549,320,514,320C480,320,446,320,411,320C377.1,320,343,320,309,320C274.3,320,240,320,206,320C171.4,320,137,320,103,320C68.6,320,34,320,17,320L0,320Z"/>
+      <path style="transform: scale(1, 0.11)" fill="#191919" fill-opacity="1"
+            d="M0,234L17.1,217.3C34.3,191,69,137,103,110.7C137.1,84,171,84,206,78.7C240,73,274,63,309,84C342.9,105,377,159,411,164C445.7,169,480,127,514,121.3C548.6,116,583,148,617,158.7C651.4,169,686,159,720,137.3C754.3,116,789,84,823,84C857.1,84,891,116,926,153.3C960,191,994,233,1029,260C1062.9,287,1097,297,1131,281.3C1165.7,265,1200,223,1234,180C1268.6,137,1303,95,1337,116C1371.4,137,1406,223,1423,265.3L1440,308L1440,320L1422.9,320C1405.7,320,1371,320,1337,320C1302.9,320,1269,320,1234,320C1200,320,1166,320,1131,320C1097.1,320,1063,320,1029,320C994.3,320,960,320,926,320C891.4,320,857,320,823,320C788.6,320,754,320,720,320C685.7,320,651,320,617,320C582.9,320,549,320,514,320C480,320,446,320,411,320C377.1,320,343,320,309,320C274.3,320,240,320,206,320C171.4,320,137,320,103,320C68.6,320,34,320,17,320L0,320Z"/>
+    </svg>
+    <h1 class="cursor">What's the plan?</h1>
+    <h2>In truth, we don't have one...</h2>
+    <p>But we can show you what we think it might look like</p>
+    <svg id="timeline" xmlns="http://www.w3.org/2000/svg" viewBox="-10.483 12.615 315.4672 330.79">
+      <defs>
+        <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" style="stop-color: var(--colour-one); stop-opacity: 1" />
+          <stop offset="100%" style="stop-color: var(--colour-two); stop-opacity: 1" />
+        </linearGradient>
+        <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="2" result="blurred"/>
+          <feMerge>
+            <feMergeNode in="blurred"/>
+            <feMergeNode in="SourceGraphic"/>
+          </feMerge>
+        </filter>
+      </defs>
+      <g transform="translate(100,67.5), scale(10)"><path pathLength="10" class="backgroundStar" fill="url(#gradient)" d="M7.657 6.247c.11-.33.576-.33.686 0l.645 1.937a2.89 2.89 0 0 0 1.829 1.828l1.936.645c.33.11.33.576 0 .686l-1.937.645a2.89 2.89 0 0 0-1.828 1.829l-.645 1.936a.361.361 0 0 1-.686 0l-.645-1.937a2.89 2.89 0 0 0-1.828-1.828l-1.937-.645a.361.361 0 0 1 0-.686l1.937-.645a2.89 2.89 0 0 0 1.828-1.828zM3.794 1.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387A1.73 1.73 0 0 0 4.593 5.69l-.387 1.162a.217.217 0 0 1-.412 0L3.407 5.69A1.73 1.73 0 0 0 2.31 4.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387A1.73 1.73 0 0 0 3.407 2.31zM10.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.16 1.16 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.16 1.16 0 0 0-.732-.732L9.1 2.137a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732z"/></g>
+      <g transform="translate(2.5,182.5), scale(8)"><path pathLength="10" class="backgroundStar" fill="url(#gradient)" d="M7.657 6.247c.11-.33.576-.33.686 0l.645 1.937a2.89 2.89 0 0 0 1.829 1.828l1.936.645c.33.11.33.576 0 .686l-1.937.645a2.89 2.89 0 0 0-1.828 1.829l-.645 1.936a.361.361 0 0 1-.686 0l-.645-1.937a2.89 2.89 0 0 0-1.828-1.828l-1.937-.645a.361.361 0 0 1 0-.686l1.937-.645a2.89 2.89 0 0 0 1.828-1.828zM3.794 1.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387A1.73 1.73 0 0 0 4.593 5.69l-.387 1.162a.217.217 0 0 1-.412 0L3.407 5.69A1.73 1.73 0 0 0 2.31 4.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387A1.73 1.73 0 0 0 3.407 2.31zM10.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.16 1.16 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.16 1.16 0 0 0-.732-.732L9.1 2.137a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732z"/></g>
+      <g transform="translate(100,102.5), scale(-4)"><path pathLength="10" class="backgroundStar" fill="url(#gradient)" d="M7.657 6.247c.11-.33.576-.33.686 0l.645 1.937a2.89 2.89 0 0 0 1.829 1.828l1.936.645c.33.11.33.576 0 .686l-1.937.645a2.89 2.89 0 0 0-1.828 1.829l-.645 1.936a.361.361 0 0 1-.686 0l-.645-1.937a2.89 2.89 0 0 0-1.828-1.828l-1.937-.645a.361.361 0 0 1 0-.686l1.937-.645a2.89 2.89 0 0 0 1.828-1.828zM3.794 1.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387A1.73 1.73 0 0 0 4.593 5.69l-.387 1.162a.217.217 0 0 1-.412 0L3.407 5.69A1.73 1.73 0 0 0 2.31 4.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387A1.73 1.73 0 0 0 3.407 2.31zM10.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.16 1.16 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.16 1.16 0 0 0-.732-.732L9.1 2.137a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732z"/></g>
+      <g transform="translate(245,307.5), scale(-4)"><path pathLength="10" class="backgroundStar" fill="url(#gradient)" d="M7.657 6.247c.11-.33.576-.33.686 0l.645 1.937a2.89 2.89 0 0 0 1.829 1.828l1.936.645c.33.11.33.576 0 .686l-1.937.645a2.89 2.89 0 0 0-1.828 1.829l-.645 1.936a.361.361 0 0 1-.686 0l-.645-1.937a2.89 2.89 0 0 0-1.828-1.828l-1.937-.645a.361.361 0 0 1 0-.686l1.937-.645a2.89 2.89 0 0 0 1.828-1.828zM3.794 1.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387A1.73 1.73 0 0 0 4.593 5.69l-.387 1.162a.217.217 0 0 1-.412 0L3.407 5.69A1.73 1.73 0 0 0 2.31 4.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387A1.73 1.73 0 0 0 3.407 2.31zM10.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.16 1.16 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.16 1.16 0 0 0-.732-.732L9.1 2.137a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732z"/></g>
+      <g transform="translate(40, 60)"><rect width="5" height="1" fill="white" rx="0.5" x="-7" y="-3.5"></rect><text font-size="10" fill="white">Game Project</text><text y="3" x="0.5" font-size="2.5" fill="white">Summer 24-25</text></g>
+      <g transform="translate(100, 140)"><rect width="5" height="1" fill="white" rx="0.5" x="-7" y="-3.5"></rect><text font-size="10" fill="white">Mobile App</text><text y="3" x="0.5" font-size="2.5" fill="white">March-April 25</text></g>
+      <g transform="translate(190, 90)"><rect width="5" height="1" fill="white" rx="0.5" x="-7" y="-3.5"></rect><text font-size="10" fill="white">Music Album</text><text y="3" x="0.5" font-size="2.5" fill="white">May-June 25</text></g>
+      <g transform="translate(145, 180)"><rect width="5" height="1" fill="white" rx="0.5" x="122" y="-3.5"></rect><text font-size="10" fill="white">Wearable Device Prototype</text><text y="3" x="0.5" font-size="2.5" fill="white">Late 2025</text></g>
+      <g transform="translate(145, 265)"><rect width="5" height="1" fill="white" rx="0.5" x="90" y="-3.5"></rect><text font-size="10" fill="white">Christmas Giveback</text><text y="3" x="0.5" font-size="2.5" fill="white">You know when</text></g>
+      <g transform="translate(55, 275)"><text font-size="15" fill="white">???</text><text y="5" x="2.5" font-size="4" fill="white">2026-2027</text></g>
+      <path pathLength="8" style="fill: none; stroke: #fff; stroke-width: 3px; stroke-linecap: round; stroke-miterlimit: 1;" d="M 28.096 30.772 L 28.096 104.167 C 28.096 104.167 21.216 137.424 52.179 147.745 C 83.142 158.066 77.982 123.662 114.106 124.235 C 150.23 124.808 212.156 85.245 160.55 57.148 C 108.944 29.051 111.812 72.63 111.812 72.63 C 111.812 72.63 106.078 105.887 168.578 129.396 C 231.078 152.905 351.491 81.804 273.509 187.882 C 195.527 293.96 312.5 347.286 169.151 284.213 C 25.802 221.14 48.165 273.318 51.032 284.786 C 53.899 296.254 96.33 340.405 96.33 340.405"/>
+      <path pathLength="8" style="fill: none; stroke: #191919; stroke-width: 2.5px; stroke-linecap: round; stroke-miterlimit: 1;" d="M 28.096 30.772 L 28.096 104.167 C 28.096 104.167 21.216 137.424 52.179 147.745 C 83.142 158.066 77.982 123.662 114.106 124.235 C 150.23 124.808 212.156 85.245 160.55 57.148 C 108.944 29.051 111.812 72.63 111.812 72.63 C 111.812 72.63 106.078 105.887 168.578 129.396 C 231.078 152.905 351.491 81.804 273.509 187.882 C 195.527 293.96 312.5 347.286 169.151 284.213 C 25.802 221.14 48.165 273.318 51.032 284.786 C 53.899 296.254 96.33 340.405 96.33 340.405"/>
+      <path pathLength="8" filter="url(#glow)" id="timelinePath" style="fill: none; stroke: url(#gradient); stroke-width: 2.5px; stroke-linecap: round; stroke-miterlimit: 1;" d="M 28.096 30.772 L 28.096 104.167 C 28.096 104.167 21.216 137.424 52.179 147.745 C 83.142 158.066 77.982 123.662 114.106 124.235 C 150.23 124.808 212.156 85.245 160.55 57.148 C 108.944 29.051 111.812 72.63 111.812 72.63 C 111.812 72.63 106.078 105.887 168.578 129.396 C 231.078 152.905 351.491 81.804 273.509 187.882 C 195.527 293.96 312.5 347.286 169.151 284.213 C 25.802 221.14 48.165 273.318 51.032 284.786 C 53.899 296.254 96.33 340.405 96.33 340.405"/>
+      <ellipse style="fill: rgb(255, 255, 255);" cx="28.385" cy="25.517" rx="12.902" ry="12.902"/>
+      <text x="18.5" y="28.5" font-size="10">2024</text>
+    </svg>
+    <h2>We're not psychics, we can't predict much further than this ;)</h2>
+    <svg class="waves" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 50">
+      <defs>
+        <linearGradient id="waveGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" style="stop-color: var(--colour-one); stop-opacity: 1" />
+          <stop offset="100%" style="stop-color: var(--colour-two); stop-opacity: 1" />
+        </linearGradient>
+      </defs>
+      <path style="transform: scale(1, 0.1)" fill="url(#waveGradient)" fill-opacity="1" 
+            d="M0,224L17.1,197.3C34.3,171,69,117,103,90.7C137.1,64,171,64,206,58.7C240,53,274,43,309,64C342.9,85,377,139,411,144C445.7,149,480,107,514,101.3C548.6,96,583,128,617,138.7C651.4,149,686,139,720,117.3C754.3,96,789,64,823,64C857.1,64,891,96,926,133.3C960,171,994,213,1029,240C1062.9,267,1097,277,1131,261.3C1165.7,245,1200,203,1234,160C1268.6,117,1303,75,1337,96C1371.4,117,1406,203,1423,245.3L1440,288L1440,320L1422.9,320C1405.7,320,1371,320,1337,320C1302.9,320,1269,320,1234,320C1200,320,1166,320,1131,320C1097.1,320,1063,320,1029,320C994.3,320,960,320,926,320C891.4,320,857,320,823,320C788.6,320,754,320,720,320C685.7,320,651,320,617,320C582.9,320,549,320,514,320C480,320,446,320,411,320C377.1,320,343,320,309,320C274.3,320,240,320,206,320C171.4,320,137,320,103,320C68.6,320,34,320,17,320L0,320Z"/>
+      <path style="transform: scale(1, 0.11)" fill="#191919" fill-opacity="1"
+            d="M0,234L17.1,217.3C34.3,191,69,137,103,110.7C137.1,84,171,84,206,78.7C240,73,274,63,309,84C342.9,105,377,159,411,164C445.7,169,480,127,514,121.3C548.6,116,583,148,617,158.7C651.4,169,686,159,720,137.3C754.3,116,789,84,823,84C857.1,84,891,116,926,153.3C960,191,994,233,1029,260C1062.9,287,1097,297,1131,281.3C1165.7,265,1200,223,1234,180C1268.6,137,1303,95,1337,116C1371.4,137,1406,223,1423,265.3L1440,308L1440,320L1422.9,320C1405.7,320,1371,320,1337,320C1302.9,320,1269,320,1234,320C1200,320,1166,320,1131,320C1097.1,320,1063,320,1029,320C994.3,320,960,320,926,320C891.4,320,857,320,823,320C788.6,320,754,320,720,320C685.7,320,651,320,617,320C582.9,320,549,320,514,320C480,320,446,320,411,320C377.1,320,343,320,309,320C274.3,320,240,320,206,320C171.4,320,137,320,103,320C68.6,320,34,320,17,320L0,320Z"/>
+    </svg>
+    <h1 class="cursor">But what <span class="textColour">actually</span> is Third Dawn Studios?</h1>
+    <h2>It's a New Zealand company for publishing indie works.</h2>
+    <p>- Indie games,<br>- Indie music,<br>- Indie films,<br>- Indie products,<br>- And so so much more...</p>
+    <p>It's about creating a platform for people during our difficult economic times. It's about building up the innovators and visionaries who might get squashed by circumstance. And it's about bringing the future to us... and improving it in the process.</p>
+    <q class="textColour">The future is bright only if we believe it can be</q>
+    <p>- Some inspiring protagonist in the third act of their superhero origin story when they were beaten by the villain and need help from the town to beat the villain</p>
+    <svg class="waves" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 50">
+      <defs>
+        <linearGradient id="waveGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" style="stop-color: var(--colour-one); stop-opacity: 1" />
+          <stop offset="100%" style="stop-color: var(--colour-two); stop-opacity: 1" />
+        </linearGradient>
+      </defs>
+      <path style="transform: scale(1, 0.1)" fill="url(#waveGradient)" fill-opacity="1" 
+            d="M0,224L17.1,197.3C34.3,171,69,117,103,90.7C137.1,64,171,64,206,58.7C240,53,274,43,309,64C342.9,85,377,139,411,144C445.7,149,480,107,514,101.3C548.6,96,583,128,617,138.7C651.4,149,686,139,720,117.3C754.3,96,789,64,823,64C857.1,64,891,96,926,133.3C960,171,994,213,1029,240C1062.9,267,1097,277,1131,261.3C1165.7,245,1200,203,1234,160C1268.6,117,1303,75,1337,96C1371.4,117,1406,203,1423,245.3L1440,288L1440,320L1422.9,320C1405.7,320,1371,320,1337,320C1302.9,320,1269,320,1234,320C1200,320,1166,320,1131,320C1097.1,320,1063,320,1029,320C994.3,320,960,320,926,320C891.4,320,857,320,823,320C788.6,320,754,320,720,320C685.7,320,651,320,617,320C582.9,320,549,320,514,320C480,320,446,320,411,320C377.1,320,343,320,309,320C274.3,320,240,320,206,320C171.4,320,137,320,103,320C68.6,320,34,320,17,320L0,320Z"/>
+      <path style="transform: scale(1, 0.11)" fill="#191919" fill-opacity="1"
+            d="M0,234L17.1,217.3C34.3,191,69,137,103,110.7C137.1,84,171,84,206,78.7C240,73,274,63,309,84C342.9,105,377,159,411,164C445.7,169,480,127,514,121.3C548.6,116,583,148,617,158.7C651.4,169,686,159,720,137.3C754.3,116,789,84,823,84C857.1,84,891,116,926,153.3C960,191,994,233,1029,260C1062.9,287,1097,297,1131,281.3C1165.7,265,1200,223,1234,180C1268.6,137,1303,95,1337,116C1371.4,137,1406,223,1423,265.3L1440,308L1440,320L1422.9,320C1405.7,320,1371,320,1337,320C1302.9,320,1269,320,1234,320C1200,320,1166,320,1131,320C1097.1,320,1063,320,1029,320C994.3,320,960,320,926,320C891.4,320,857,320,823,320C788.6,320,754,320,720,320C685.7,320,651,320,617,320C582.9,320,549,320,514,320C480,320,446,320,411,320C377.1,320,343,320,309,320C274.3,320,240,320,206,320C171.4,320,137,320,103,320C68.6,320,34,320,17,320L0,320Z"/>
+    </svg>
+  </div>
+  <footer class="footerContainer">
+    <div class="row"><h1>Third Dawn Studios</h1><a href="https://g.co/kgs/8oDYffJ" class="textColour">Nelson, New Zealand</a><div id="CEO" class="tooltip">CEO: Vincent Rodley<div class="tooltiptext">Famous Youtuber <a href="https://www.youtube.com/@vindognz">@vindognz</a></div></div><div id="CFO" class="tooltip">CFO: Fionn Cassidy<div class="tooltiptext">Known War-Criminal</div></div><div id="SrDev" class="tooltip">Senior Developer: Joel Batchelar<div class="tooltiptext">I built this website</div></div><div id="you" class="tooltip"><div class="tooltiptext">Newest Member!</div></div></div>
+    <div class="row"><h2>Join Us</h2><form id="emailform"><input type="email" placeholder="you@email.com"><div id="submitButton" onclick="this.parentElement.requestSubmit()">-></div></form><br><h2>Have any questions?</h2><form id="amaform"><input type="text" placeholder="AMA question"><div id="submitButton" onclick="this.parentElement.requestSubmit()">-></div></form></div>
+    <div class="row"><h2>Quick Links</h2><a href="#main" style="color: #919bff; margin-top: 10px;">To Top</a><a href="/team" style="color: #919bff; margin-top: 5px;">Meet The Team</a><a href="/projects" style="color: #919bff; margin-top: 5px;">Projects</a></div>
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>

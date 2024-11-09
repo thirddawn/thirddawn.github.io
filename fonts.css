@@ -1,0 +1,34 @@
+@font-face {
+    font-family: Slick;
+    src: url("ITC-Avant-Garde-Gothic-Pro.ttf");
+}
+
+@font-face {
+    font-family: Inconsolata;
+    src: url("Inconsolata-Regular.otf");
+}
+
+@font-face {
+  font-family: Inter;
+  src: url("AzeretMono-VariableFont_wght.ttf");
+}
+
+@font-face {
+  font-family: Roboto;
+  src: url("Roboto-Regular.ttf");
+}
+
+@font-face {
+  font-family: DMSerif;
+  src: url("DMSerifText-Regular.ttf");
+}
+
+@font-face {
+  font-family: Monsterrat;
+  src: url("Montserrat-VariableFont_wght.ttf");
+}
+
+@font-face {
+  font-family: DMSans;
+  src: url("DMSans-VariableFont.ttf");
+}
