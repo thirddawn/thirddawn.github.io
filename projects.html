@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Third Dawn Studios</title>
+    <link rel="stylesheet" href="fonts.css">
+    <link rel="stylesheet" href="projects.css">
+    <link rel="preload" href="images/noise.png" as="image">
+</head>
+    <body>
+        <div id="header">
+            <div id="toolbar">
+                <svg xmlns="http://www.w3.org/2000/svg" class="active" viewBox="0 -960 960 960" fill="#fff"><path d="M160-160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h240l80 80h320q33 0 56.5 23.5T880-640v400q0 33-23.5 56.5T800-160H160Z"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" class="inactive" viewBox="0 -960 960 960" fill="#fff" onclick="window.location.href = '/index.html?skip'"><path d="M160-120v-480l320-240 320 240v480H560v-280H400v280H160Z"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" class="inactive" viewBox="0 -960 960 960" fill="#fff" onclick="window.location.href = '/team.html'"><path d="M40-160v-112q0-34 17.5-62.5T104-378q62-31 126-46.5T360-440q66 0 130 15.5T616-378q29 15 46.5 43.5T680-272v112H40Zm720 0v-120q0-44-24.5-84.5T666-434q51 6 96 20.5t84 35.5q36 20 55 44.5t19 53.5v120H760ZM360-480q-66 0-113-47t-47-113q0-66 47-113t113-47q66 0 113 47t47 113q0 66-47 113t-113 47Zm400-160q0 66-47 113t-113 47q-11 0-28-2.5t-28-5.5q27-32 41.5-71t14.5-81q0-42-14.5-81T544-792q14-5 28-6.5t28-1.5q66 0 113 47t47 113Z"/></svg>
+            </div>
+        </div>
+        <div id="hero">
+            <div id="right-arrow" onclick="updateHero(true)">></div>
+            <div id="left-arrow" onclick="updateHero(false)"><</div>
+            <div id="foreground"></div>
+            <div id="background"></div>
+            <div id="next-foreground"></div>
+            <div id="next-background"></div>
+        </div>
+        <footer class="footerContainer">
+            <div class="row"><h1>Third Dawn Studios</h1><a href="https://g.co/kgs/8oDYffJ" class="textColour">Nelson, New Zealand</a><div id="CEO" class="tooltip">CEO: Vincent Rodley<div class="tooltiptext">Famous Youtuber <a href="https://www.youtube.com/@vindognz">@vindognz</a></div></div><div class="tooltip">Fullstack Developer: Fionn Cassidy<div class="tooltiptext">Known War-Criminal</div></div><div id="SrDev" class="tooltip">Senior Developer: Joel Batchelar<div class="tooltiptext">I built this website</div></div><div id="you" class="tooltip"><div class="tooltiptext">Newest Member!</div></div></div>
+            <div class="row"><h2>Join Us</h2><form id="emailform"><input type="email" placeholder="you@email.com"><div id="submitButton" onclick="this.parentElement.requestSubmit()">-></div></form><br><h2>Have any questions?</h2><form id="amaform"><input type="text" placeholder="AMA question"><div id="submitButton" onclick="this.parentElement.requestSubmit()">-></div></form></div>
+            <div class="row"><h2>Quick Links</h2><a href="#main" style="color: #919bff; margin-top: 10px;">To Top</a><a href="/team" style="color: #919bff; margin-top: 5px;">Meet The Team</a><a href="/projects" style="color: #919bff; margin-top: 5px;">Projects</a></div>
+        </footer>
+        <script src="projects.js"></script>
+    </body>
+</html>

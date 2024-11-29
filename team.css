@@ -5,7 +5,7 @@
 
 html:after{
     content:"";
-    background-image:url("https://upload.wikimedia.org/wikipedia/commons/7/76/1k_Dissolve_Noise_Texture.png");
+    background-image:url("images/noise.png");
     height: 300%;
     width: 300%;
     position: fixed;
@@ -83,6 +83,11 @@ scroll-behavior: smooth;
 }
 
 ::-webkit-scrollbar
+{
+display: none;
+}
+
+::-moz-scrollbar
 {
 display: none;
 }
@@ -171,9 +176,36 @@ body{
     }
 }
 
+#info{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    user-select: none;
+}
+
+#info h1{
+    font-family: DMSerif;
+    opacity: 0;
+    transition: opacity 0.5s;
+}
+
+#info p{
+    font-family: Roboto;
+    opacity: 0;
+    transition: opacity 0.5s;
+}
+
 #main{
     width: 100%;
     height: 100%;
+    opacity: 0;
+    transition: opacity 0.5s;
+    user-select: none;
 }
 
 .textColour{
@@ -186,14 +218,21 @@ body{
 @property --image-url{
     syntax: "<url>";
     inherits: true;
-    initial-value: url("https://upload.wikimedia.org/wikipedia/en/c/c5/Andrew_Hink_selfie.jpeg");
+    initial-value: url("foreground.png");
 }
+
+@property --background-image-url{
+    syntax: "<url>";
+    inherits: true;
+    initial-value: url("background.png");
+}
+
 
 /* Card Styles */
 .card {
     height: 75vh;
     aspect-ratio: 2/3;
-    background: linear-gradient(0deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 50%), linear-gradient(0deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 50%), var(--image-url);
+    background: linear-gradient(0deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0) 50%), var(--image-url);
     background-size: cover;
     background-position: center;
     border-radius: 50px;
@@ -201,7 +240,7 @@ body{
     position: relative;
     transform-style: preserve-3d;
     transition: transform 0.1s ease-out;
-    overflow: hidden; /* To ensure the content stays within bounds */
+    overflow: visible;
     z-index: 10;
     transform-origin: 0% 0%;
     left: 50%;
@@ -221,26 +260,189 @@ body{
     height: 100%;
     width: 100%;
     position: absolute;
+    border-radius: 50px;
+}
+
+.card .background{
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    border-radius: 50px;
+    transform: translateZ(-40px);
+    background: var(--background-image-url);
+    background-size: cover;
+    background-position: center;
+}
+
+.card .border1{
+    height: 102%;
+    width: 102%;
+    top:-1%;
+    left:-1%;
+    position: absolute;
+    border-radius: 50px;
+    border: solid white 1px;
+    z-index: 10;
+    transform: translateZ(0px);
+    opacity: 0;
+    transition: opacity 0.1s;
+}
+
+.card .border2{
+    height: 102%;
+    width: 102%;
+    top:-1%;
+    left:-1%;
+    position: absolute;
+    border-radius: 50px;
+    border: solid rgba(255, 255, 255, 0.666) 1px;
+    z-index: 10;
+    transform: translateZ(-20px);
+    opacity: 0;
+    transition: opacity 0.1s;
+}
+
+.card .border3{
+    height: 102%;
+    width: 102%;
+    top:-1%;
+    left:-1%;
+    position: absolute;
+    border-radius: 50px;
+    border: solid rgba(255, 255, 255, 0.333) 1px;
+    z-index: 10;
+    transform: translateZ(-40px);
+    opacity: 0;
+    transition: opacity 0.1s;
+}
+
+.card:hover{
+    .border1{
+        opacity: 1;
+        transition: opacity 0.5s;
+    }
+    .border2{
+        opacity: 1;
+        transition: opacity 0.5s;
+    }
+    .border3{
+        opacity: 1;
+        transition: opacity 0.5s;
+    }
+    h1{
+        transform: translateZ(30px) translateY(calc(-1 * var(--text-position))); 
+    }
+    p{
+        height: calc(1em + var(--text-position));
+    }
+    h1::before{
+        background-color: var(--neon);
+        box-shadow: 0 0 25px 2.5px var(--neon-glow);
+        animation: jitter infinite 0.4s forwards 0.1s;
+        transform: translate(0, 0);
+    }
 }
 
 /* Text Styles */
 .card h1 {
     font-family: 'Montserrat', sans-serif;
     position: absolute;
-    bottom: 60px; /* Position it above the bottom */
-    left: 30px;
+    bottom: 10%; /* Position it above the bottom */
+    left: 7.5%;
     z-index: 2; /* Ensure it appears above the background */
-    transform: translateZ(-50px); /* Move it away from the viewer */
-    transition: transform 0.1s ease-out; /* Smooth transition on transform */
+    transform: translateZ(30px); /* Move it away from the viewer */
+    transition: transform 0.3s ease-out; /* Smooth transition on transform */
+    font-size: 3vh;
+}
+
+@property --neon {
+    syntax: "<color>";
+    inherits: true;
+    initial-value: #9461fd;
+}
+
+@property --neon-glow {
+    syntax: "<color>";
+    inherits: true;
+    initial-value: #4003e6;
+}
+
+@property --neon-position {
+    syntax: "<percentage>";
+    inherits: true;
+    initial-value: -40%;
+}
+
+@property --text-position {
+    syntax: "<length>";
+    inherits: true;
+    initial-value: 10vh;
+}
+
+.card h1::before{
+    content: '';
+    width: 100%;
+    height: 100%;
+    background-color: rgba(233, 236, 26, 0);
+    display: block;
+    position: absolute;
+    top: 0px;
+    left: -5px;
+    z-index: -1;
+    border-radius: 5px;
+    padding: 0px 5px;
+    transform: translate(var(--neon-position), 0);
+    transition: background-color 0.1s ease-out, transform 0.025s linear;
+}
+
+@keyframes jitter {
+    0%{
+        transform: translate(-1px,0);
+    }
+    10%{
+        transform: translate(-0.5px,1px);
+    }
+    20%{
+        transform: translate(-1px,0);
+    }
+    30%{
+        transform: translate(-0.6px,0.9px);
+    }
+    40%{
+        transform: translate(-1.1px,-0.3px);
+    }
+    50%{
+        transform: translate(-0.6px,0.9px);
+    }
+    60%{
+        transform: translate(3px,-0.3px);
+    }
+    70%{
+        transform: translate(-0.1px,0.2px);
+    }
+    80%{
+        transform: translate(-0.6px,0.9px);
+    }
+    90%{
+        transform: translate(3px,-0.3px);
+    }
+    100%{
+        transform: translate(-0.1px,0.2px);
+    }
 }
 
 .card p {
     font-family: 'DM Sans', sans-serif;
     font-style: italic;
+    font-size: 1em;
     position: absolute;
-    bottom: 40px; /* Position slightly below h1 */
-    left: 30px;
+    bottom: 7.5%; /* Position it above the bottom */
+    left: 7.5%;
     z-index: 1; /* Ensure it appears above the background but below the h1 */
-    transform: translateZ(-30px); /* Move it away from the viewer */
-    transition: transform 0.1s ease-out; /* Smooth transition on transform */
+    transform: translateZ(20px); /* Move it away from the viewer */
+    transition: transform 0.3s ease-out, height 0.3s ease-out; /* Smooth transition on transform */
+    overflow: hidden;
+    width: 85%;
+    height: 1.2em;
+    font-size: 1.5vh;
 }
