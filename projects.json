@@ -1,8 +1,14 @@
 [
     {
-        "name": "OnRoadsBetween"
+        "name": "OnRoadsBetween",
+        "blurb": "A multiplayer horror game set in 1980s New Zealand. You and your friends set off on a journey to get from the top of the country to the bottom, collecting evidence of the paranormal activity happening along the way. Grab your camera, your highschool car, a couple mates and just go. The game is in active development. (Steam page coming soon)",
+        "max-height": "4em",
+        "project-link": ""
     },
     {
-        "name": "OurExams"
+        "name": "OurExams",
+        "blurb": "A website designed to host all of the exam files which NZQA took down. A new update is in the works, making studying online 10 times easier and 100 times as convienent. (Click to visit website)",
+        "max-height": "3em",
+        "project-link": "https://ourexams.org"
     }
 ]

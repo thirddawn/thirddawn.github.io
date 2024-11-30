@@ -19,6 +19,7 @@ fg = document.getElementById("foreground");
 bg = document.getElementById("background");
 nextfg = document.getElementById("next-foreground");
 nextbg = document.getElementById("next-background");
+blurb = document.getElementById("blurb");
 heroId = 0;
 
 function updateHero(input){
@@ -43,6 +44,13 @@ function updateHero(input){
         }
         heroId = heroId % projectInfo.length
     }
+    if(projectInfo[heroId]["project-link"] != ""){
+        fg.onclick = ()=>window.open(projectInfo[heroId]["project-link"], '_blank').focus();
+    }
+    else{
+        fg.onclick = ()=>{};
+    }
+    blurb.style.setProperty("--max-height", "0px");
     nextfg.style.transform = "translate("+sign+"100vw,0)";
     nextbg.style.opacity = "0";
     setTimeout(()=>{
@@ -68,6 +76,8 @@ function updateHero(input){
             nextfg.style.transform = "translate("+sign+"100vw,0)";
             nextbg.style.transition = "filter 0.5s";
             nextbg.style.opacity = "0";
+            blurb.style.setProperty("--max-height", projectInfo[heroId]["max-height"]);
+            blurb.innerText = projectInfo[heroId]["blurb"];
         }, 1000);
     }, 1);
 }
