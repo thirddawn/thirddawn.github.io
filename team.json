@@ -1,6 +1,6 @@
 [
     {
-        "name": "Joel Batchelar",
+        "name": "Joel",
         "title": "CEO",
         "flavour": "All your base are belong to us",
         "details": "Lo-Fi, Sci-Fi, not shy, cool guy",
@@ -9,10 +9,11 @@
         "neon": "#9461fd",
         "neonGlow": "#4003e6",
         "neonPosition": "100%",
-        "textPosition": "2.1em"
+        "textPosition": "2.1em",
+        "html":"<div class='section'><div class='column'><h1>Joel Batchelar</h1><p>I like making music, games, art, apps and anything else I can dream up. Lots of people are better at those than me, which is why I am always asking questions. I like being a jack of all trades, and it makes me perfectly suited to being the glue that holds a team together.</p></div><div class='column'><h2>See my latest project</h2><a href='projects?project-id=0'><img width='500px' src='projects/OnRoadsBetween/Banner.webp'></a></div><div class='column'><h2>See all projects</h2><a href='projects?author=0'><img width='500px' src='projects/OurExams/Banner.webp'></a></div></div></div>"
     },
     {
-        "name": "Vincent Rodley",
+        "name": "Vincent",
         "title": "Sr Programmer",
         "flavour": "This is his cat...",
         "details": "Speedcuber, YouTuber, doesn't Uber, ultra super",
@@ -21,6 +22,20 @@
         "neon": "#006eff",
         "neonGlow": "#004eb5",
         "neonPosition": "-10%",
-        "textPosition": "2em"
+        "textPosition": "2em",
+        "html":"<div class='section'><h1>Vincent Rodley</h1></div>"
+    },
+    {
+        "name": "Yo",
+        "title": "Sr Programmer",
+        "flavour": "This is his cat...",
+        "details": "Speedcuber, YouTuber, doesn't Uber, ultra super",
+        "foreground": "images/VinRFG.png",
+        "background": "images/VinRBG.png",
+        "neon": "#006eff",
+        "neonGlow": "#004eb5",
+        "neonPosition": "-10%",
+        "textPosition": "2em",
+        "html":"<div class='section'><h1>Vincent Rodley</h1></div>"
     }
 ]

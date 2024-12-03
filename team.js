@@ -4,7 +4,7 @@ function createCards(){
 
         json.forEach((card)=>{
             main.innerHTML += `
-            <div class="card inactiveCard" style="--image-url:url('${card.foreground}'); --background-image-url:url('${card.background}'); --neon:${card.neon}; --neon-glow:${card.neonGlow}; --neon-position: ${card.neonPosition}; --text-position: ${card.textPosition};">
+            <div class="card inactiveCard" style="--image-url:url('${card.foreground}'); --background-image-url:url('${card.background}'); --neon:${card.neon}; --neon-glow:${card.neonGlow}; --neon-position: ${card.neonPosition}; --text-position: ${card.textPosition};" data-index="${json.indexOf(card)}">
             <div class="background"></div>
             <div class="shine"></div>
             <h1>${card.name}, ${card.title}</h1>
@@ -14,9 +14,14 @@ function createCards(){
             </p><div class="border1"></div><div class="border2"></div><div class="border3"></div></div>`;
         });
 
+        data = json;
+
         setupCards();
     });
 }
+
+data = []
+pageHTML = ""
 
 function setupCards(){
     const cards = Array.from(document.querySelectorAll(".card"));
@@ -88,22 +93,24 @@ function setupCards(){
                 document.removeEventListener('mousemove', mouseMove);
                 document.removeEventListener('mouseup', mouseUp);
                 if(x > window.innerWidth*0.3){
-                    console.log("love")
+                    pageHTML += data[cards[(cardIndex + cards.length - 1) % cards.length].getAttribute("data-index")]["html"];
+                    pageHTML += "<div class='divider'></div>"
                     card.classList.add("inactiveCard");
                     cards[cardIndex].classList.remove("inactiveCard");
                     cardIndex++;
                     if(cardIndex >= cards.length){
                         cardIndex -= cards.length;
+                        generatePage();
                     }
                     updateCardPositions();
                 }
                 else if(x < -window.innerWidth*0.3){
-                    console.log("hate")
                     card.classList.add("inactiveCard");
                     cards[cardIndex].classList.remove("inactiveCard");
                     cardIndex++;
                     if(cardIndex >= cards.length){
                         cardIndex -= cards.length;
+                        generatePage();
                     }
                     updateCardPositions();
                 }
@@ -148,3 +155,19 @@ document.addEventListener("mousedown", ()=>{
         setTimeout(()=>document.getElementById("main").style.opacity = 1, 500);
     }
 });
+
+page = document.getElementById("page");
+
+function generatePage(){
+    page.innerHTML = "";
+    page.innerHTML += pageHTML;
+    pageHTML = "";
+    page.innerHTML += `
+    <footer class="footerContainer">
+        <div class="row"><h1>Third Dawn Studios</h1><a href="https://g.co/kgs/8oDYffJ" class="textColour">Nelson, New Zealand</a><div id="CEO" class="tooltip">Sr Programmer: Vincent Rodley<div class="tooltiptext">Famous Youtuber <a href="https://www.youtube.com/@vindognz">@vindognz</a></div></div><div class="tooltip">Fullstack Developer: Fionn Cassidy<div class="tooltiptext"><i>No comment</i></div></div><div id="SrDev" class="tooltip">CEO: Joel Batchelar<div class="tooltiptext">And built this website</div></div><div id="you" class="tooltip"></div>
+        <div class="row"><h2>Join Us</h2><form id="emailform"><input type="email" placeholder="you@email.com"><div id="submitButton" onclick="this.parentElement.requestSubmit()">-></div></form><br><h2>Have any questions?</h2><form id="amaform"><input type="text" placeholder="AMA question"><div id="submitButton" onclick="this.parentElement.requestSubmit()">-></div></form></div>
+        <div class="row"><h2>Quick Links</h2><a href="#main" style="color: #919bff; margin-top: 10px;">To Top</a><a href="/team" style="color: #919bff; margin-top: 5px;">Meet The Team</a><a href="/projects" style="color: #919bff; margin-top: 5px;">Projects</a></div>
+    </footer>`
+    page.style.display = "flex";
+    page.scrollIntoView({behavior: 'smooth'});
+}

@@ -1,6 +1,16 @@
+const urlParams = new URLSearchParams(window.location.search);
+
 projectInfo = []
 fetch('projects.json').then((res)=>res.json()).then((json)=>{
     projectInfo = json;
+    if (urlParams.has("author")){
+        projectInfo = json.filter(item => item.author === parseInt(urlParams.get("author")));
+    }
+    if (urlParams.has("project-id")){
+        if (parseInt(urlParams.get("project-id")) != 0){
+            setHero(parseInt(urlParams.get("project-id")));
+        }
+    }
 });
 
 const pos = { x : 0, y : 0 };
@@ -54,10 +64,10 @@ function updateHero(input){
     nextfg.style.transform = "translate("+sign+"100vw,0)";
     nextbg.style.opacity = "0";
     setTimeout(()=>{
-        nextfg.style.background = "url(projects/" + projectInfo[heroId]["name"] + "/Foreground.png) 50% 50%";
+        nextfg.style.background = "url(projects/" + projectInfo[heroId]["name"] + "/Foreground.webp) 50% 50%";
         nextfg.style.transform = "translate(0vw, 0)";
         nextfg.style.transition = "transform 1s ease-in-out";
-        nextbg.style.background = "url(projects/" + projectInfo[heroId]["name"] + "/Background.png) 50% 50%";
+        nextbg.style.background = "url(projects/" + projectInfo[heroId]["name"] + "/Background.webp) 50% 50%";
         nextbg.style.opacity = "1";
         nextbg.style.transition = "opacity 1s ease-in-out, filter 0.5s";
         fg.style.transition = "transform 1s ease-in-out";
@@ -67,10 +77,10 @@ function updateHero(input){
     
         setTimeout(()=>{
             fg.style.transition = "";
-            fg.style.background = "url(projects/" + projectInfo[heroId]["name"] + "/Foreground.png) 50% 50%";
+            fg.style.background = "url(projects/" + projectInfo[heroId]["name"] + "/Foreground.webp) 50% 50%";
             fg.style.transform = "rotateX(calc((var(--y) - 0.5) * 25deg)) rotateY(calc((var(--x) - 0.5) * -25deg))";
             bg.style.transition = "filter 0.5s";
-            bg.style.background = "url(projects/" + projectInfo[heroId]["name"] + "/Background.png) 50% 50%";
+            bg.style.background = "url(projects/" + projectInfo[heroId]["name"] + "/Background.webp) 50% 50%";
             bg.style.opacity = "1";
             nextfg.style.transition = "";
             nextfg.style.transform = "translate("+sign+"100vw,0)";
@@ -80,4 +90,21 @@ function updateHero(input){
             blurb.innerText = projectInfo[heroId]["blurb"];
         }, 1000);
     }, 1);
+}
+
+function setHero(input){
+    heroId = input;
+    if(projectInfo[heroId]["project-link"] != ""){
+        fg.onclick = ()=>window.open(projectInfo[heroId]["project-link"], '_blank').focus();
+    }
+    else{
+        fg.onclick = ()=>{};
+    }
+    fg.style.background = "url(projects/" + projectInfo[heroId]["name"] + "/Foreground.webp) 50% 50%";
+    fg.style.transform = "rotateX(calc((var(--y) - 0.5) * 25deg)) rotateY(calc((var(--x) - 0.5) * -25deg))";
+    bg.style.transition = "filter 0.5s";
+    bg.style.background = "url(projects/" + projectInfo[heroId]["name"] + "/Background.webp) 50% 50%";
+    nextbg.style.opacity = "0";
+    blurb.style.setProperty("--max-height", projectInfo[heroId]["max-height"]);
+    blurb.innerText = projectInfo[heroId]["blurb"];
 }
