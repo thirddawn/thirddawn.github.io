@@ -1,4 +1,9 @@
+const urlSearchParams = new URLSearchParams(window.location.search);
 
+if(urlSearchParams.has('stage')){
+    localStorage.setItem('stage', urlSearchParams.get('stage'));
+    window.location.href = window.location.origin + window.location.pathname;
+}
 
 const invisibleChar = '\u200B'; // Zero-width space
 const commandList = ['help', 'login','dir', 'cd', 'copy', 'del', 'move', 'mkdir', 'rmdir', 'type'];
@@ -47,7 +52,7 @@ let steps = [
     "Initializing hardware...",
     "  CPU: TCS 80486 @ 33MHz",
     "  RAM: 4MB - OK",
-    "  Primary Disk: TCS-250GB HDD - OK",
+    "  Primary Disk: TCS-50MB HDD - OK",
     "  Floppy Drive A: 1.44MB - OK",
     "  Video Adapter: TCS VGA - OK",
     "  Network: TCS Ethernet - Connected",
@@ -77,21 +82,21 @@ function displaySteps() {
 
     steps.forEach((step, index) => {
         setTimeout(() => {
-            TOS.innerHTML += "<br>";
+            savedLog += "<br>";
             WriteText(step, speed);
         }, delay);
 
         delay += step.length * speed + 250; // Adds a pause between each step (500ms here)
     });
 
-    isReadyForInput = true;
-    localStorage.setItem('stage', 'd976e9d7-2c35-4130-b97a-eda83419e709');
+    setTimeout(() => {isReadyForInput = true;}, delay);
 }
 
 if (localStorage.getItem('stage') === null) {
 displaySteps();
 }
 else{
+    GetStageNumber();
     WriteLine("> ");
     isReadyForInput = true;
 }
@@ -162,6 +167,7 @@ function runCommand(command) {
                 if(data.result == "success"){
                     WriteLine("<br>" + data.reply + "<br>" + "> ");
                     localStorage.setItem('stage', data.stage);
+                    GetStageNumber();
                 }
                 else{
                     WriteLine("<br>" + data.reply + "<br>" + "> ");
@@ -176,11 +182,22 @@ function runCommand(command) {
     }
 }
 
-new QRCode(document.getElementById("qrcode"), {
-    text: "https://thirddawnstudios.com/miraishi",
-    width: 512,
-    height: 512,
-    colorDark : "#00000000",
-    colorLight : "#10e010",
-    correctLevel : QRCode.CorrectLevel.H
-});
+
+
+function GetStageNumber(){
+    document.getElementById("qrcode").innerHTML = "";
+    new QRCode(document.getElementById("qrcode"), {
+        text: "https://thirddawnstudios.com/miraishi?stage=" + localStorage.getItem('stage'),
+        width: 512,
+        height: 512,
+        colorDark : "#00000000",
+        colorLight : "#10e010",
+        correctLevel : QRCode.CorrectLevel.H
+    });
+    document.getElementById("link").href = "https://thirddawnstudios.com/miraishi?stage=" + localStorage.getItem('stage');
+    document.getElementById("link").innerText = "https://thirddawnstudios.com/miraishi?stage=" + localStorage.getItem('stage');
+    
+    fetch(backendServerURL + "?cmd=stage&stage=" + localStorage.getItem('stage'), {method: 'POST'}).then(res=>res.json()).then(data=>{
+        document.getElementById("stageLabel").innerText = "Stage " + data.stage;
+    });
+}

@@ -69,6 +69,7 @@ body{
     color: rgb(16, 224, 16);
     line-height: 0px;
     transform: translate(0px, -1px);
+    word-spacing: -5px;
 }
 
 #input{
@@ -98,12 +99,18 @@ body{
     font-size: 20px;
     color: rgb(16, 224, 16);
     text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #qrcode{
     border: #10e010 solid 10px;
     border-radius: 10px;
     margin-bottom: 20px;
+    width: 512px;
+    margin-left:50%;
+    transform: translate(-50%, 0);
 }
 
 @keyframes blink {
