@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Miraishi</title>
+    <link rel="stylesheet" href="miraishi.css">
+</head>
+<body>
+    <svg style="display: none;">
+        <defs>
+        <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="10,0.1" result="blurred"/>
+          <feComponentTransfer in="blurred" result="glow">
+            <feFuncA type="table" tableValues="0 0.5"/>
+          </feComponentTransfer>
+          <feBlend in="SourceGraphic" in2="glow" mode="screen"></feBlend>
+        </filter>
+      </defs>
+    </svg>
+    <div class="overlay">
+    </div>
+    <div class="container">
+      <div class="shareableLink" style="display: none;"><div id="qrcode"></div><a href="https://thirddawnstudios.com/miraishi?stage=">https://thirddawnstudios.com/miraishi?stage=</a></div>
+      <div id="stageIndicator" onclick="document.querySelector('.shareableLink').style.display = 'block'; document.addEventListener('mouseup', ()=>{document.querySelector('.shareableLink').style.display = 'none'; document.removeEventListener(this)})"><p>Stage 2</p></div>
+      <h1 id="console">
+    
+      </h1>
+      <input type="text" id="input" autofocus="true" onblur="this.focus()"></input>
+      <h1 id="hint">
+
+      </h1>
+    </div>
+    <script src="libs/qrcode.js"></script>
+    <script src="miraishi.js"></script>
+</body>
+</html>

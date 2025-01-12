@@ -13,20 +13,20 @@
         "html":"<div class='section'><div class='column'><h1>Joel Batchelar</h1><p>I like making music, games, art, apps and anything else I can dream up. Lots of people are better at those than me, which is why I am always asking questions. I like being a jack of all trades, and it makes me perfectly suited to being the glue that holds a team together.</p></div><div class='column'><h2>See my latest project</h2><a href='projects?project-id=0'><img width='500px' src='projects/OnRoadsBetween/Banner.webp'></a></div><div class='column'><h2>See all projects</h2><a href='projects?author=0'><img width='500px' src='projects/OurExams/Banner.webp'></a></div></div></div>"
     },
     {
-        "name": "Vincent",
-        "title": "Sr Programmer",
+        "name": "Fionn",
+        "title": "Fullstack Developer",
         "flavour": "This is his cat...",
-        "details": "Speedcuber, YouTuber, doesn't Uber, ultra super",
+        "details": "Stuck in class, Codes too fast, Mysterious past, Lucky last",
         "foreground": "images/VinRFG.png",
         "background": "images/VinRBG.png",
         "neon": "#006eff",
         "neonGlow": "#004eb5",
         "neonPosition": "-10%",
         "textPosition": "2em",
-        "html":"<div class='section'><h1>Vincent Rodley</h1></div>"
+        "html":"<div class='section'><h1>Fionn Cassidy</h1></div>"
     },
     {
-        "name": "Yo",
+        "name": "Vincent",
         "title": "Sr Programmer",
         "flavour": "This is his cat...",
         "details": "Speedcuber, YouTuber, doesn't Uber, ultra super",

@@ -1,0 +1,128 @@
+@font-face {
+    font-family: IBM;
+    src: url("fonts/IBMPlexMono-Regular.ttf");
+}
+
+*,*:after {
+    padding: 0;
+    margin: 0;
+    --edge-padding: 50px;
+}
+
+body{
+    background-color: #191919;
+    height: 100vh;
+    width: 100%;
+
+}
+
+.overlay{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: repeating-linear-gradient(transparent, transparent 5px, #aaaaaa28 5px, #aaaaaa28 6px);
+    background-position: 0 0;
+    animation: scrollLines 0.1s linear infinite;
+    z-index: 5;
+    user-select: none;
+    pointer-events: none;
+}
+
+.container{
+    font-family: IBM;
+    font-size: 7px;
+    color: rgb(16, 224, 16);
+    height: calc(100% - var(--edge-padding)*2);
+    width: calc(100% - var(--edge-padding)*2);
+    padding: var(--edge-padding);
+    filter: url(#glow);
+}
+
+#console::after{
+    content: "_";
+    animation: blink 1s step-end infinite;
+}
+
+#stageIndicator{
+    padding: 5px 10px;
+    height: 30px;
+    border-radius: 50px;
+    border: rgb(16, 224, 16) solid 1px;
+    position: absolute;
+    bottom: 50px;
+    right: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0.7;
+    cursor: pointer;
+}
+
+#stageIndicator:hover{
+    opacity: 1;
+}
+
+#stageIndicator p{
+    font-size: 25px;
+    color: rgb(16, 224, 16);
+    line-height: 0px;
+    transform: translate(0px, -1px);
+}
+
+#input{
+    position: absolute;
+    left:-9999px;
+}
+
+#console, #hint {
+    display: inline;
+}
+
+#hint {
+    color: rgba(16, 224, 16, 0.5); /* Lighter color for hint */
+}
+
+.shareableLink {
+    position: absolute;
+    left: 50%;
+    top:50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    text-align: center;
+}
+
+.shareableLink a{
+    font-family: IBM;
+    font-size: 20px;
+    color: rgb(16, 224, 16);
+    text-decoration: none;
+}
+
+#qrcode{
+    border: #10e010 solid 10px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+@keyframes blink {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes scrollLines {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 6px;
+    }
+}
