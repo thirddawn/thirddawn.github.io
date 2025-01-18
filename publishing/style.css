@@ -1,0 +1,288 @@
+*,*:after {
+    padding: 0;
+    margin: 0;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+html{
+    overflow-y: scroll;
+}
+
+body{
+    background-color: #191919;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+#hero{
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    #text{
+        color: white;
+        position: absolute;
+        text-align: center;
+        width: max-content;
+        z-index: 1;
+        left:50%;
+        top:50%;
+        transform: translate(-50%, -50%);
+        h1{
+            font-size: min(8vw, 5em);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        h2{
+            font-size: min(5vw, 3em);
+            font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: 200;
+        }
+    }
+}
+
+#hero::after{
+    content: " ";
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.548) 0%, rgba(0,0,0,0) 80%), radial-gradient(circle, rgba(0, 0, 0, 0.267) 0%, rgba(0,0,0,0) 50%);
+}
+
+#img1{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: url("https://static.wixstatic.com/media/7540a66fadec4af4923b8edb5477a575.jpg/v1/fill/w_1903,h_843,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/7540a66fadec4af4923b8edb5477a575.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 1;
+}
+
+#img2{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: url("https://static.wixstatic.com/media/ff54d5_cb5873f1a94943bc85ef589dd8a78aa0~mv2.jpg/v1/fill/w_1740,h_771,al_c,q_85,enc_avif,quality_auto/ff54d5_cb5873f1a94943bc85ef589dd8a78aa0~mv2.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0;
+}
+
+header{
+    position: fixed;
+    z-index: 10;
+    top: 1vh;
+    left: 50%;
+    transform: translate(-50%, 0);
+    display: flex;
+    gap: 1.5em;
+    padding: 0.75em 1.5em 0.5em 1.5em;
+    border-radius: 10em;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 18px 50px -10px;
+    backdrop-filter: brightness(0.9) blur(2px);
+    text-wrap: nowrap;
+    max-width: 100%;
+    transition: max-width 1s;
+    a{
+        font-size: 1.5em;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color:rgb(215, 237, 255);
+        font-style: normal;
+        text-decoration: none;
+        transition: color 0.3s, transform 0.3s;
+        transition: opacity 1s;
+    }
+    a:hover{
+        color:white;
+        transform: scale(1.05);
+    }
+    img{
+        height: 1.5em;
+        transition: filter 0.3s;
+    }
+    img:hover{
+        filter: saturate(0) brightness(2);
+    }
+}
+
+section{
+    color: white;
+    display: flex;
+    flex-direction: column;
+    margin: 5vw;
+    gap: 1vw;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    .row{
+        display: flex;
+        flex-direction: row;
+        flex: 1;
+        gap: 1vw;
+        margin-bottom: 2vh;
+        align-items: center;
+    } 
+    .row-reverse{
+        display: flex;
+        flex-direction: row-reverse;
+        flex: 1;
+        gap: 1vw;
+        margin-bottom: 2vh;
+        align-items: center;
+    } 
+    .column{
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+    } 
+    h1{
+        font-size: min(4vw, 6em);
+    }
+    h2{
+        font-size: min(1.5vw, 2.5em);
+        margin-bottom: 1em;
+        font-weight: 200;
+    }
+    p{
+        font-size: min(1.1vw, 1.25em);
+        margin-bottom: 1em;
+    }
+    #showcaseImage{
+        width: 100%;
+        aspect-ratio: 12/5;
+        border-radius: 1vw;
+    }
+    .emphasis{
+        color: rgb(103, 178, 240);
+        font-style: italic;
+    }
+}
+
+#links{
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+    justify-content: center;
+    margin: 2em;
+    a{
+        font-size: 1.5em;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color:rgb(215, 237, 255);
+        font-style: normal;
+        text-decoration: none;
+        transition: color 0.3s, transform 0.3s;
+    }
+    a:hover{
+        color:white;
+        transform: scale(1.05);
+    }
+}
+
+#contact-bg{
+    position: absolute;
+    top:0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("logo.svg");
+    background-position: 0,0;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    filter: saturate(0.0) brightness(0.5);
+    z-index: 0;
+}
+
+#contact {
+    position: relative;
+    overflow: hidden;
+    color: white;
+    padding: 20px;
+    background-color: #333;
+    border-radius: 8px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    z-index: 0;
+}
+
+#contact h2, #contact h3 {
+    margin-top: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 3em;
+    z-index: 1;
+}
+
+#contact p {
+    margin: 5px 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    z-index: 1;
+}
+
+#contactForm {
+    display: flex;
+    flex-direction: column;
+    z-index: 2;
+}
+
+#contactForm label {
+    margin-top: 10px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#contactForm input, #contactForm textarea {
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #444;
+    border-radius: 4px;
+    background-color: #333;
+    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#contactForm button {
+    margin-top: 10px;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #555;
+    color: white;
+    cursor: pointer;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#contactForm button:hover {
+    background-color: #666;
+}
+
+@media (max-aspect-ratio: 1/1){
+    header{
+        padding: 0.5em 0.75em;
+        max-width: 2.25em;
+        a:not(:has(img)){
+            opacity: 0;
+            transition: opacity 0.1s;
+        }
+    }
+    section, .row, .row-reverse{
+        flex-direction: column !important;
+    }
+    #showcaseImage{
+        height: 300px !important;
+    }
+    section{
+        h1{
+            font-size: min(10vw, 5em) !important;
+        }
+        h2{
+            font-size: min(3.5vw, 2.5em) !important;
+        }
+        p{
+            font-size: min(2.5vw, 1.25em) !important;
+        }
+    }
+
+}
+
