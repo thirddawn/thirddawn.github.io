@@ -21,7 +21,8 @@ var previousTimestamp = 0;
 var charsAdded = 0;
 
 var currentLoc = [];
-var structure = [];
+var structure = [{"name": "Filesystem not initialized..."}];
+var isStructureInitialized = false;
 
 function UpdateText(time){
     delta = time - previousTimestamp;
@@ -29,6 +30,11 @@ function UpdateText(time){
     charsAdded += delta * charsPerSecond/ 1000;
     charsAdded = Math.min(charsAdded, queue.length);
     if(Math.round(charsAdded) > 0){
+        var toAdd = queue.substring(0, Math.round(charsAdded));
+        if(toAdd.includes("<") && !toAdd.includes(">")){
+            const index = queue.substring(Math.round(charsAdded)).indexOf(">");
+            charsAdded += index;
+        }
         savedLog += queue.substring(0, Math.round(charsAdded));
         queue = queue.substring(Math.round(charsAdded));
         charsAdded -= Math.round(charsAdded);
@@ -116,7 +122,7 @@ function displaySteps() {
         delay += step.length * speed + 100; // Adds a pause between each step (500ms here)
     });
 
-    setTimeout(() => {isReadyForInput = true;}, delay);
+    setTimeout(() => {isReadyForInput = true; localStorage.setItem('stage', "d976e9d7-2c35-4130-b97a-eda83419e709");}, delay);
 }
 
 if (localStorage.getItem('stage') === null) {
@@ -124,15 +130,32 @@ displaySteps();
 }
 else{
     GetStageNumber();
-    WriteLine("> ");
+    WriteLine("<br>> ");
     isReadyForInput = true;
 }
 
-
+let commandLog = [];
+let commandIndex = -1;
+const maxLogSize = 50;
 
 document.addEventListener('keydown', function(event) {
     if (isReadyForInput) {
         if (!TOS) return;
+
+        if (event.key === 'ArrowUp') {
+            if (commandIndex > 0) {
+                commandIndex--;
+                input.value = commandLog[commandIndex];
+            }
+        } else if (event.key === 'ArrowDown') {
+            if (commandIndex < commandLog.length - 1) {
+                commandIndex++;
+                input.value = commandLog[commandIndex];
+            } else {
+                commandIndex = commandLog.length;
+                input.value = '';
+            }
+        }
 
         const key = event.key;
 
@@ -150,6 +173,14 @@ document.addEventListener('keydown', function(event) {
                 input.value = input.value.replace(currentText, matchingCommand);
                 document.getElementById('hint').innerText = ''; // Clear hint
             }
+            if(currentText.startsWith("cd")){
+                const currentFolder = getFolder(currentLoc);
+                const matchingFolder = currentFolder.find(folder => {return folder.name.startsWith(currentText.split(/\s+/)[1]) && "folder" in folder;});
+                if (matchingFolder) {
+                    input.value = input.value.replace(currentText.split(/\s+/)[1], matchingFolder.name);
+                    document.getElementById('hint').innerText = ''; // Clear hint
+                }
+            }
         }
         TOS.innerHTML = savedLog + input.value;
     }
@@ -164,6 +195,13 @@ document.addEventListener('input', function(event) {
     } else {
         document.getElementById('hint').innerText = '';
     }
+    if(currentText.startsWith("cd")){
+        const currentFolder = getFolder(currentLoc);
+        const matchingFolder = currentFolder.find(folder => {return folder.name.startsWith(currentText.split(/\s+/)[1]) && "folder" in folder;});
+        if (matchingFolder) {
+            document.getElementById('hint').innerText = matchingFolder.name;
+        }
+    }
 });
 
 function extractArguments(command) {
@@ -172,6 +210,11 @@ function extractArguments(command) {
 }
 
 function runCommand(command) {
+    if (commandLog.length >= maxLogSize) {
+        commandLog.shift();
+    }
+    commandLog.push(command);
+    commandIndex = commandLog.length;
     const args = extractArguments(command);
     switch(args[0]) {
         case 'help':
@@ -205,14 +248,46 @@ function runCommand(command) {
             WriteLine("> ");
             break;
         case 'dir':
-
+            if(localStorage.getItem("stage") === null || localStorage.getItem("stage") == "d976e9d7-2c35-4130-b97a-eda83419e709"){
+                WriteText("<br>Access denied. Please login to continue.<br>> ");
+                break;
+            }
+            if(!isStructureInitialized) getStructure();
+            listCurrentFolder(true);
+            WriteText("> ");
+            break;
+        case 'ls':
+            if(localStorage.getItem("stage") === null || localStorage.getItem("stage") == "d976e9d7-2c35-4130-b97a-eda83419e709"){
+                WriteText("<br>Access denied. Please login to continue.<br>> ");
+                break;
+            }
+            if(!isStructureInitialized) getStructure();
+            listCurrentFolder(true);
+            WriteText("> ");
+            break;
+        case 'cd':
+            if(localStorage.getItem("stage") === null || localStorage.getItem("stage") == "d976e9d7-2c35-4130-b97a-eda83419e709"){
+                WriteText("<br>Access denied. Please login to continue.<br>> ");
+                break;
+            }
+            if(args.length < 2){
+                WriteText("<br>Incorrect command usage, cd [folder]<br>> ");
+                break;
+            }
+            if(args[1] == ".."){
+                currentLoc.pop();
+            }
+            else{
+                changeFolder(args[1]);
+            }
+            listCurrentFolder(true);
+            WriteText("> ");
+            break;
         default:
             WriteText("<br>'" + command + "' is not recognized as an internal command, ensure drives are mounted correctly if trying to access files.<br>> ");
             break;
     }
 }
-
-
 
 function GetStageNumber(){
     document.getElementById("qrcode").innerHTML = "";
@@ -228,8 +303,17 @@ function GetStageNumber(){
     document.getElementById("link").innerText = "https://thirddawnstudios.com/miraishi?stage=" + localStorage.getItem('stage');
     
     getData("?cmd=stage&stage=" + localStorage.getItem('stage'), 5, data=>{
-        if(data.status == "error") return;
+        if(data.status == "failure") return;
         document.getElementById("stageLabel").innerText = "Stage " + data.reply;
+    });
+    getStructure();
+}
+
+function getStructure(){
+    getData("?cmd=structure&stage=" + localStorage.getItem('stage'), 5, data=>{
+        if(data.status == "failure") return;
+        structure = JSON.parse(data.reply);
+        isStructureInitialized = true;
     });
 }
 
@@ -241,18 +325,66 @@ function showStage(){
 function getData(options, retries, func){
     for (let index = 0; index <= retries; index++) {
         try {
-            request = fetch(backendServerURL + options, {method: 'POST', redirect: "follow", headers: {"Content-Type": "text/plain;charset=utf-8"}}).catch(error=>{return {status: "error", reply: "Server error. Reloading or trying again later may resolve the issue."};}).then(res=>{if(res.status == "error") return res; else return res.json()}).then(data=>{func(data);});
+            request = fetch(backendServerURL + options, {method: 'POST', redirect: "follow", headers: {"Content-Type": "text/plain;charset=utf-8"}}).catch(error=>{return {status: "failure", reply: "Server error. Reloading or trying again later may resolve the issue."};}).then(res=>{if(res.status == "failure") return res; else return res.json()}).then(data=>{func(data);});
             return;
         } catch (error) {
             console.error(error);
         }
     }
-    func({status: "error", reply: "Server error. Reloading or trying again later may resolve the issue."});
+    func({status: "failure", reply: "Server error. Reloading or trying again later may resolve the issue."});
 }
 
-function navigate(nav){
-    var loc = currentLoc;
-    for (let index = 0; index < nav.length; index++) {
+function getNamedPath(nav){
+    var path = [];
+    var folder = structure;
+    for(let index = 0; index < nav.length; index++){
+        path.push(folder[index]["name"]);
+        folder = folder[index]["folder"];
+    }
+    return path;
+}
 
+function listCurrentFolder(showPath = false){
+    var folder = getFolder(currentLoc);
+    var output = "<br>";
+    var indent = 0;
+    if(showPath){
+        var path = getNamedPath(currentLoc);
+        indent = path.length;
+        for(let index = 0; index < path.length; index++){
+            output += "<span class='darker'>" + "  ".repeat(index) + "└─┬─ " + path[index] + "</span><br>";
+        }
+    }
+    if(folder != null)
+    {
+        for(let index = 0; index < folder.length; index++){
+            output += "  ".repeat(indent) + (index == folder.length - 1 ? "└── " : "├── ") + folder[index]["name"] + "<br>";
+        }
+    }
+    WriteText(output);
+}
+
+function getFolder(nav){
+    var folder = structure;
+    for(let index = 0; index < nav.length; index++){
+        if("folder" in folder[nav[index]])
+        {
+            folder = folder[nav[index]]["folder"];
+        }
+        else{
+            return null;
+        }
+    }
+    return folder;
+}
+
+function changeFolder(folderName){
+    var folder = getFolder(currentLoc);
+    if(folder == null) folder = structure;
+    for(let index = 0; index < folder.length; index++){
+        if(folder[index]["name"] == folderName){
+            currentLoc.push(index);
+            return folder[index];
+        }
     }
 }

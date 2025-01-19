@@ -40,6 +40,14 @@ body{
     filter: url(#glow);
 }
 
+#console{
+    white-space: pre-wrap;
+}
+
+#console .darker{
+    color: rgba(16, 224, 16, 0.7);
+}
+
 #console::after{
     content: "_";
     animation: blink 1s step-end infinite;

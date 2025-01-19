@@ -176,6 +176,8 @@
         <button id="deleteButton" onclick="deleteSelected()" disabled>Delete Selected</button>
         <button onclick="generateJSON()">Generate JSON</button>
         <button onclick="showTemplateModal()">Edit Template</button>
+        <button onclick="importJSON()">Import JSON</button>
+        <input type="file" id="jsonFileInput" style="display: none;" accept=".json" onchange="handleFileSelect(event)">
     </div>
     <div class="content">
         <div class="explorer" id="explorer"></div>
@@ -220,7 +222,7 @@
             </form>
         </div>
     </div>
-
+    
     <script>
         let structure = [];
         let selectedFolder = structure;
@@ -228,21 +230,21 @@
         let template = JSON.parse(localStorage.getItem('template')) || [];
         let currentImageIndex = 1;
         const totalImages = 5;
-
+    
         function cycleBackgroundImages() {
             currentImageIndex = (currentImageIndex % totalImages) + 1;
             document.body.style.backgroundImage = `url('images/background/${currentImageIndex}.webp')`;
         }
-
+    
         setInterval(cycleBackgroundImages, 30000);
-
+    
         function showModal(type, edit = false) {
             document.getElementById('itemType').value = type;
             document.getElementById('editMode').value = edit;
             document.getElementById('modalTitle').textContent = `${edit ? 'Edit' : 'Add'} ${type.charAt(0).toUpperCase() + type.slice(1)}`;
             const dynamicFields = document.getElementById('dynamicFields');
             dynamicFields.innerHTML = '';
-
+    
             if (edit && selectedElement) {
                 for (const key in selectedElement) {
                     if (key !== 'folder') {
@@ -264,10 +266,10 @@
                     dynamicFields.appendChild(customField);
                 });
             }
-
+    
             document.getElementById('modal').style.display = 'block';
         }
-
+    
         function createField(id, labelText, value) {
             const fieldDiv = document.createElement('div');
             const label = document.createElement('label');
@@ -282,19 +284,19 @@
             fieldDiv.appendChild(input);
             return fieldDiv;
         }
-
+    
         function hideModal() {
             document.getElementById('modal').style.display = 'none';
             document.getElementById('modalForm').reset();
         }
-
+    
         function submitForm(event) {
             event.preventDefault();
             const type = document.getElementById('itemType').value;
             const editMode = document.getElementById('editMode').value === 'true';
             const formData = new FormData(event.target);
             const data = Object.fromEntries(formData.entries());
-
+    
             if (editMode && selectedElement) {
                 for (const key in data) {
                     selectedElement[key] = data[key];
@@ -307,11 +309,11 @@
                     selectedFolder.push(data);
                 }
             }
-
+    
             renderExplorer();
             hideModal();
         }
-
+    
         function editSelected() {
             if (selectedElement) {
                 const type = selectedElement.folder ? 'folder' : 'file';
@@ -320,7 +322,7 @@
                 alert("No item selected.");
             }
         }
-
+    
         function deleteSelected() {
             if (selectedElement) {
                 const confirmed = confirm("Are you sure you want to delete the selected item?");
@@ -337,7 +339,7 @@
                 alert("No item selected.");
             }
         }
-
+    
         function findParentFolder(parent, target) {
             for (let item of parent) {
                 if (item === target) {
@@ -352,7 +354,7 @@
             }
             return null;
         }
-
+    
         function renderExplorer(parent = structure, container = document.getElementById('explorer'), depth = 0) {
             container.innerHTML = '';
             parent.forEach(item => {
@@ -379,7 +381,7 @@
                 }
             });
         }
-
+    
         function selectFolder(folder, element) {
             selectedFolder = folder.folder || structure;
             selectedElement = folder;
@@ -388,7 +390,7 @@
             document.getElementById('deleteButton').disabled = false;
             updatePreview();
         }
-
+    
         function deselect() {
             selectedFolder = structure;
             selectedElement = null;
@@ -396,7 +398,7 @@
             document.getElementById('deleteButton').disabled = true;
             updatePreview();
         }
-
+    
         function updatePreview() {
             const previewContent = document.getElementById('previewContent');
             previewContent.innerHTML = '';
@@ -415,42 +417,46 @@
                 }
             }
         }
-
+    
         document.getElementById('explorer').addEventListener('click', (event) => {
             if (event.target.classList.contains('explorer')) {
                 deselect();
             }
         });
-
+    
         document.addEventListener('click', () => {
             hideContextMenu();
         });
-
+    
         function showContextMenu(x, y) {
             const contextMenu = document.getElementById('contextMenu');
             contextMenu.style.left = `${x}px`;
             contextMenu.style.top = `${y}px`;
             contextMenu.style.display = 'block';
         }
-
+    
         function hideContextMenu() {
             const contextMenu = document.getElementById('contextMenu');
             contextMenu.style.display = 'none';
         }
-
+    
         function generateJSON() {
             const jsonOutput = JSON.stringify(structure, null, 2);
-            document.getElementById('jsonOutput').textContent = jsonOutput;
-            document.getElementById('jsonModal').style.display = 'block';
-            navigator.clipboard.writeText(jsonOutput).then(() => {
-                alert("JSON copied to clipboard!");
-            });
+            const blob = new Blob([jsonOutput], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'structure.json';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
         }
-
+    
         function hideJsonModal() {
             document.getElementById('jsonModal').style.display = 'none';
         }
-
+    
         function showTemplateModal() {
             const templateFields = document.getElementById('templateFields');
             templateFields.innerHTML = '';
@@ -464,11 +470,11 @@
             });
             document.getElementById('templateModal').style.display = 'block';
         }
-
+    
         function hideTemplateModal() {
             document.getElementById('templateModal').style.display = 'none';
         }
-
+    
         function addTemplateField() {
             const fieldDiv = createField('newField', 'New Field', '');
             const deleteButton = document.createElement('button');
@@ -477,13 +483,13 @@
             fieldDiv.appendChild(deleteButton);
             document.getElementById('templateFields').appendChild(fieldDiv);
         }
-
+    
         function deleteTemplateField(index) {
             template.splice(index, 1);
             localStorage.setItem('template', JSON.stringify(template));
             showTemplateModal();
         }
-
+    
         function saveTemplate(event) {
             event.preventDefault();
             const formData = new FormData(event.target);
@@ -491,20 +497,39 @@
             localStorage.setItem('template', JSON.stringify(template));
             hideTemplateModal();
         }
-
+    
         function getFolderIcon() {
             return `<svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M10 4H4C2.9 4 2 4.9 2 6V18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V8C22 6.9 21.1 6 20 6H12L10 4Z" fill="currentColor"/>
                     </svg>`;
         }
-
+    
         function getFileIcon() {
             return `<svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M14 2H6C4.9 2 4 2.9 4 4V20C4 21.1 4.9 22 6 22H18C19.1 22 20 21.1 20 20V8L14 2Z" fill="currentColor"/>
                     </svg>`;
         }
-
-        renderExplorer();
+    
+        function importJSON() {
+            document.getElementById('jsonFileInput').click();
+        }
+    
+        function handleFileSelect(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    try {
+                        const importedStructure = JSON.parse(e.target.result);
+                        structure = importedStructure;
+                        renderExplorer();
+                    } catch (error) {
+                        alert("Invalid JSON file. " + error);
+                    }
+                };
+                reader.readAsText(file);
+            }
+        }
     </script>
 </body>
 </html>
