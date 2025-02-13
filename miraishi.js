@@ -7,7 +7,7 @@ if(urlSearchParams.has('stage')){
 
 const invisibleChar = '\u200B'; // Zero-width space
 const commandList = [
-    'help', 'login', 'dir', 'ls', 'cd', 'type', 'cat', 'echo', 'find', 'date', 'time', 'whoami', 'hostname', 'ping', 'ipconfig', 'ifconfig', 'uptime', 'uname', 'history', 'clear', 'cls'
+    'help', 'login', 'dir', 'ls', 'cd', 'type', 'cat', 'echo', 'whoami', 'open', 'ping', 'uptime', 'clear', 'cls', "mount"
 ];
 const backendServerURL = "https://script.google.com/macros/s/AKfycbz7u3ptL_cm1KEhy04Llu-TNKIVf1kgRio22WRSNmdeU1e2W_jq-xFU9W_SLFh9DT8IQQ/exec";
 
@@ -352,7 +352,8 @@ function listCurrentFolder(showPath = false){
         var path = getNamedPath(currentLoc);
         indent = path.length;
         for(let index = 0; index < path.length; index++){
-            output += "<span class='darker'>" + "  ".repeat(index) + "└─┬─ " + path[index] + "</span><br>";
+            filler = path[index].endsWith(".lnk") ? ">" : "─"
+            output += "<span class='darker'>" + "  ".repeat(index) + "└" + filler + "┬─ " + path[index] + "</span><br>";
         }
     }
     if(folder != null)
@@ -384,6 +385,7 @@ function changeFolder(folderName){
     for(let index = 0; index < folder.length; index++){
         if(folder[index]["name"] == folderName){
             currentLoc.push(index);
+            if (folderName.endsWith(".lnk")) WriteText("\nFollowing net-link");
             return folder[index];
         }
     }
