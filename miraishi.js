@@ -181,6 +181,14 @@ document.addEventListener('keydown', function(event) {
                     document.getElementById('hint').innerText = ''; // Clear hint
                 }
             }
+            if(currentText.startsWith("type") || currentText.startsWith("cat") || currentText.startsWith("echo")){
+                const currentFolder = getFolder(currentLoc);
+                const matchingFile = currentFolder.find(folder => {return folder.name.startsWith(currentText.split(/\s+/)[1]) && !("folder" in folder);});
+                if (matchingFile) {
+                    input.value = input.value.replace(currentText.split(/\s+/)[1], matchingFile.name);
+                    document.getElementById('hint').innerText = ''; // Clear hint
+                }
+            }
         }
         TOS.innerHTML = savedLog + input.value;
     }
@@ -200,6 +208,13 @@ document.addEventListener('input', function(event) {
         const matchingFolder = currentFolder.find(folder => {return folder.name.startsWith(currentText.split(/\s+/)[1]) && "folder" in folder;});
         if (matchingFolder) {
             document.getElementById('hint').innerText = matchingFolder.name;
+        }
+    }
+    if(currentText.startsWith("type") || currentText.startsWith("cat") || currentText.startsWith("echo")){
+        const currentFolder = getFolder(currentLoc);
+        const matchingFile = currentFolder.find(folder => {return folder.name.startsWith(currentText.split(/\s+/)[1]) && !("folder" in folder);});
+        if (matchingFile){
+            document.getElementById('hint').innerText = matchingFile.name;
         }
     }
 });
@@ -283,6 +298,39 @@ function runCommand(command) {
             listCurrentFolder(true);
             WriteText("> ");
             break;
+        case 'type':
+            if(args.length < 2){
+                WriteText("<br>Incorrect command usage, type [file]<br>> ");
+                break;
+            }
+            file = readFile(args[1]);
+            if(file != null){
+                WriteText("<br><span class='darker'>Reading file contents...</span><br>" + file["content"]);
+            }
+            WriteText("<br>> ");
+            break;
+        case 'cat':
+            if(args.length < 2){
+                WriteText("<br>Incorrect command usage, cat [file]<br>> ");
+                break;
+            }
+            file = readFile(args[1]);
+            if(file != null){
+                WriteText("<br><span class='darker'>Reading file contents...</span><br>" + file["content"]);
+            }
+            WriteText("<br>> ");
+            break;
+        case 'echo':
+            if(args.length < 2){
+                WriteText("<br>Incorrect command usage, echo [file]<br>> ");
+                break;
+            }
+            file = readFile(args[1]);
+            if(file != null){
+                WriteText("<br><span class='darker'>Reading file contents...</span><br>" + file["content"]);
+            }
+            WriteText("<br>> ");
+            break;
         default:
             WriteText("<br>'" + command + "' is not recognized as an internal command, ensure drives are mounted correctly if trying to access files.<br>> ");
             break;
@@ -338,8 +386,8 @@ function getNamedPath(nav){
     var path = [];
     var folder = structure;
     for(let index = 0; index < nav.length; index++){
-        path.push(folder[index]["name"]);
-        folder = folder[index]["folder"];
+        path.push(folder[nav[index]]["name"]);
+        folder = folder[nav[index]]["folder"];
     }
     return path;
 }
@@ -383,10 +431,25 @@ function changeFolder(folderName){
     var folder = getFolder(currentLoc);
     if(folder == null) folder = structure;
     for(let index = 0; index < folder.length; index++){
-        if(folder[index]["name"] == folderName){
-            currentLoc.push(index);
-            if (folderName.endsWith(".lnk")) WriteText("\nFollowing net-link");
-            return folder[index];
+        if(folder[index]["folder"] != null){
+            if(folder[index]["name"] == folderName){
+                currentLoc.push(index);
+                if (folderName.endsWith(".lnk")) WriteText("\nFollowing net-link");
+                return folder[index];
+            }
         }
     }
+}
+
+function readFile(fileName){
+    var folder = getFolder(currentLoc);
+    if(folder == null) folder = structure;
+    for(let index = 0; index < folder.length; index++){
+        if(folder[index]["folder"] == null){
+            if(folder[index]["name"] == fileName){
+                return folder[index];
+            }
+        }
+    }
+    return null;
 }
