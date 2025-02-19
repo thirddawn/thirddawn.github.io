@@ -16,6 +16,18 @@ body{
 
 }
 
+#bad{
+    color: white;
+    font-family: IBM;
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+
 .overlay{
     position: absolute;
     top: 0;
@@ -48,8 +60,7 @@ body{
     color: rgba(16, 224, 16, 0.7);
 }
 
-#console::after{
-    content: "_";
+.cursor {
     animation: blink 1s step-end infinite;
 }
 

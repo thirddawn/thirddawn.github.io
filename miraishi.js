@@ -67,7 +67,7 @@ function WriteText(string) {
     //         TOS.innerHTML = savedLog;
     //     }, speed);
     // });
-    queue += string;
+    queue += string.replaceAll("\\n", "<br>");
     holdMyBeer = isReadyForInput;
     return new Promise((resolve) => {setTimeout(resolve,  string.length/charsPerSecond * 1000);});
 }
@@ -129,6 +129,9 @@ if (localStorage.getItem('stage') === null) {
 displaySteps();
 }
 else{
+    if(localStorage.getItem('stage') == "port-changed-bad-ending"){
+        document.body.innerHTML = "<div id='bad'><h1>Bad Ending</h1><p>You changed the port, now you can't access the site. (Clear the cache to try again)</p></div>";
+    }
     GetStageNumber();
     WriteLine("<br>> ");
     isReadyForInput = true;
@@ -156,8 +159,6 @@ document.addEventListener('keydown', function(event) {
                 input.value = '';
             }
         }
-
-        const key = event.key;
 
         if (event.key === 'Enter') {
             const command = input.value.trim();
@@ -190,34 +191,20 @@ document.addEventListener('keydown', function(event) {
                 }
             }
         }
-        TOS.innerHTML = savedLog + input.value;
+        updateConsole();
     }
 });
 
-document.addEventListener('input', function(event) {
-    TOS.innerHTML = savedLog + input.value;
-    const currentText = input.value.trim();
-    const matchingCommand = commandList.find(cmd => cmd.startsWith(currentText));
-    if (matchingCommand && matchingCommand !== currentText) {
-        document.getElementById('hint').innerText = matchingCommand;
-    } else {
-        document.getElementById('hint').innerText = '';
-    }
-    if(currentText.startsWith("cd")){
-        const currentFolder = getFolder(currentLoc);
-        const matchingFolder = currentFolder.find(folder => {return folder.name.startsWith(currentText.split(/\s+/)[1]) && "folder" in folder;});
-        if (matchingFolder) {
-            document.getElementById('hint').innerText = matchingFolder.name;
-        }
-    }
-    if(currentText.startsWith("type") || currentText.startsWith("cat") || currentText.startsWith("echo")){
-        const currentFolder = getFolder(currentLoc);
-        const matchingFile = currentFolder.find(folder => {return folder.name.startsWith(currentText.split(/\s+/)[1]) && !("folder" in folder);});
-        if (matchingFile){
-            document.getElementById('hint').innerText = matchingFile.name;
-        }
-    }
+document.addEventListener('keyup', function(event) {
+    updateConsole();
 });
+
+function updateConsole() {
+    const cursorPosition = input.selectionStart;
+    const beforeCursor = input.value.substring(0, cursorPosition);
+    const afterCursor = input.value.substring(cursorPosition);
+    TOS.innerHTML = savedLog + beforeCursor + '<span class="cursor">_</span>' + afterCursor;
+}
 
 function extractArguments(command) {
     const parts = command.split(/\s+/);
@@ -233,10 +220,65 @@ function runCommand(command) {
     const args = extractArguments(command);
     switch(args[0]) {
         case 'help':
-            WriteText("<br>Available commands: " + commandList.join(', ') + "<br>Type 'help' followed by a command for more information on a specific command.").then(()=>{
-                if(localStorage.getItem("stage") == "d976e9d7-2c35-4130-b97a-eda83419e709") WriteText("<br>Many commands do not work without logging in. Please type 'login' to continue.").then(()=>WriteLine('<br>' + "> "));
-                else WriteText('<br>' + "> ");
-            });
+            if(args.length > 1){
+                switch(args[1]){
+                    case 'help':
+                        WriteText("<br>Displays a list of available commands.<br>> ");
+                        break;
+                    case 'login':
+                        WriteText("<br>Logs in to the system.<br>Usage: login [username] [password]<br>> ");
+                        break;
+                    case 'dir':
+                        WriteText("<br>Lists the contents of the current directory.<br>> ");
+                        break;
+                    case 'ls':
+                        WriteText("<br>Lists the contents of the current directory.<br>> ");
+                        break;
+                    case 'cd':
+                        WriteText("<br>Changes the current directory.<br>Usage: cd [folder]<br>> ");
+                        break;
+                    case 'type':
+                        WriteText("<br>Displays the contents of a file.<br>Usage: type [file]<br>> ");
+                        break;
+                    case 'cat':
+                        WriteText("<br>Displays the contents of a file.<br>Usage: cat [file]<br>> ");
+                        break;
+                    case 'echo':
+                        WriteText("<br>Displays the contents of a file.<br>Usage: echo [file]<br>> ");
+                        break;
+                    case 'whoami':
+                        WriteText("<br>Displays the current user.<br>> ");
+                        break;
+                    case 'open':
+                        WriteText("<br>Changes the port of the system.<br>Usage: open [port]<br>> ");
+                        break;
+                    case 'ping':
+                        WriteText("<br>Pings a server.<br>Usage: ping [address]<br>> ");
+                        break;
+                    case 'uptime':
+                        WriteText("<br>Displays the system uptime.<br>> ");
+                        break;
+                    case 'clear':
+                        WriteText("<br>Clears the console.<br>> ");
+                        break;
+                    case 'cls':
+                        WriteText("<br>Clears the console.<br>> ");
+                        break;
+                    case 'mount':
+                        WriteText("<br>Mounts a drive.<br>Usage: mount [drive]<br>> ");
+                        break;
+                    default:
+                        WriteText("<br>Command not found.<br>> ");
+                        break;
+                }
+            }
+            else
+            {
+                WriteText("<br>Available commands: " + commandList.join(', ') + "<br>Type 'help' followed by a command for more information on a specific command.").then(()=>{
+                    if(localStorage.getItem("stage") == "d976e9d7-2c35-4130-b97a-eda83419e709") WriteText("<br>Many commands do not work without logging in. Please type 'login' to continue.").then(()=>WriteLine('<br>' + "> "));
+                    else WriteText('<br>' + "> ");
+                });
+            }
             break;
         case 'login':
             if(args.length < 3){
@@ -331,6 +373,73 @@ function runCommand(command) {
             }
             WriteText("<br>> ");
             break;
+        case 'whoami':
+            if(localStorage.getItem("stage") === null || localStorage.getItem("stage") == "d976e9d7-2c35-4130-b97a-eda83419e709"){
+                WriteText("<br>Access denied. Please login to continue.<br>> ");
+                break;
+            }
+            WriteText("<br>Retrieving user information...<br>");
+            getData("?cmd=whoami&stage=" + localStorage.getItem('stage'), 5, data=>{
+                if(data.status == "failure") {
+                    WriteText("<br>Failed to retrieve user information.<br>> ");
+                    return;
+                }
+                WriteText("Logged in as user: " + data.reply + "<br>> ");
+            });
+            break;
+        case 'open':
+            if(localStorage.getItem("stage") === null || localStorage.getItem("stage") == "d976e9d7-2c35-4130-b97a-eda83419e709"){
+                WriteText("<br>Access denied. Please login to continue.<br>> ");
+                break;
+            }
+            if(args.length < 2){
+                WriteText("<br>Incorrect command usage, open [port]<br>> ");
+                break;
+            }
+            WriteText("<br>Changing from port 8080 to port " + args[1] + "...<br>");
+            WriteText("<br>Port changed successfully.<br>You will now be logged out...<br>> ");
+            localStorage.setItem('stage', "port-changed-bad-ending");
+            setTimeout(()=>location.reload(),5000);
+            break;
+        case 'ping':
+            if(localStorage.getItem("stage") === null || localStorage.getItem("stage") == "d976e9d7-2c35-4130-b97a-eda83419e709"){
+                WriteText("<br>Access denied. Please login to continue.<br>> ");
+                break;
+            }
+            if(args.length < 2){
+                WriteText("<br>Incorrect command usage, ping [address]<br>> ");
+                break;
+            }
+            WriteText("<br>Pinging " + args[1] + "...<br>");
+            ref = setInterval(()=>{WriteText("<br>Reply from " + args[1]);}, 500);
+            setTimeout(()=>{WriteText("<br><br>Ping successful.<br>> "); clearInterval(ref);}, 2000);
+            break;
+        case 'uptime':
+            if(localStorage.getItem("stage") === null || localStorage.getItem("stage") == "d976e9d7-2c35-4130-b97a-eda83419e709"){
+                WriteText("<br>Access denied. Please login to continue.<br>> ");
+                break;
+            }
+            WriteText("<br>Retrieving system uptime...<br>");
+            uptime = Date.now() - new Date(1987, 2, 1).getTime();
+            const totalSeconds = Math.floor(uptime / 1000);
+            const days = Math.floor(totalSeconds / (3600 * 24)).toLocaleString();
+            const hours = Math.floor((totalSeconds % (3600 * 24)) / 3600);
+            const minutes = Math.floor((totalSeconds % 3600) / 60);
+            const seconds = totalSeconds % 60;
+            WriteText("<br>System uptime: " + days + " days, " + hours + " hours, " + minutes + " minutes, " + seconds + " seconds (" + (Date.now() - new Date(1987, 2, 1).getTime())  + "ms)<br>> ");
+            break;
+        case 'mount':
+            if(localStorage.getItem("stage") === null || localStorage.getItem("stage") == "d976e9d7-2c35-4130-b97a-eda83419e709"){
+                WriteText("<br>Access denied. Please login to continue.<br>> ");
+                break;
+            }
+            if(args.length < 2){
+                WriteText("<br>Incorrect command usage, mount [drive]<br>> ");
+                break;
+            }
+            WriteText("<br>Trying to mount drive " + args[1] + "...<br>");
+            WriteText("<br>Error mounting drive<br>> ");
+            break;
         default:
             WriteText("<br>'" + command + "' is not recognized as an internal command, ensure drives are mounted correctly if trying to access files.<br>> ");
             break;
@@ -367,7 +476,7 @@ function getStructure(){
 
 function showStage(){
     document.querySelector('.shareableLink').style.display = 'block'; 
-    document.addEventListener('mouseup', ()=>{document.querySelector('.shareableLink').style.display = 'none'; document.removeEventListener('mouseup', this);});
+    document.addEventListener('mouseup', ()=>{ navigator.clipboard.writeText("https://thirddawnstudios.com/miraishi?stage=" + localStorage.getItem('stage')); document.querySelector('.shareableLink').style.display = 'none'; document.removeEventListener('mouseup', this);});
 }
 
 function getData(options, retries, func){

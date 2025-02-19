@@ -14,7 +14,7 @@
             color: #e0e0e0;
             margin: 0;
             height: 100vh;
-            overflow: hidden;
+            overflow: auto;
             background: url('images/background/1.webp') no-repeat center center fixed;
             background-size: cover;
             backdrop-filter: brightness(1.2) blur(2px);
@@ -49,14 +49,21 @@
             display: flex;
             flex: 1;
             width: 100%;
+            overflow: hidden;
         }
-        .explorer {
+        .explorer-wrapper {
             display: flex;
             flex-direction: column;
             width: 75%;
             padding: 20px;
             overflow-y: auto;
             border-right: 1px solid #333;
+            flex: 1;
+        }
+        .explorer {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
         }
         .folder, .file {
             display: flex;
@@ -77,9 +84,9 @@
             background-color: #333;
         }
         #explorer {
-            height: 100%;
             font-size: 2em;
-            overflow-y: scroll;
+            overflow-y: auto;
+            flex: 1;
         }
         .context-menu {
             display: none;
@@ -180,7 +187,9 @@
         <input type="file" id="jsonFileInput" style="display: none;" accept=".json" onchange="handleFileSelect(event)">
     </div>
     <div class="content">
-        <div class="explorer" id="explorer"></div>
+        <div class="explorer-wrapper">
+            <div class="explorer" id="explorer"></div>
+        </div>
         <div class="preview" id="preview">
             <h2>Selected Item Details</h2>
             <div id="previewContent"></div>
